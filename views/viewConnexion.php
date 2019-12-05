@@ -1,6 +1,7 @@
 <?php
     $this->_t = "Connexion / Inscription";
     $this->_style = "Connexion";
+    require('config.php');
 ?>
 
     <!-- LOGFORM -->
@@ -10,7 +11,7 @@
             <a id="inscrire">S'INSCRIRE</a>
         </div>
         <div class="loginForm" id="loginForm">
-            <form class="formBloc" action="connexion/getCon" method="POST">
+            <form class="formBloc" action="<?= $url ?>connexion/getCon" method="POST">
                 <label for="pseudo"><i class="fas fa-user"></i> Pseudo</label>
                 <input class="pseudo inputText" type="text" name="pseudo">
                 <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
@@ -36,3 +37,4 @@
             </form>
         </div>
     </div>
+    <?=  $errorMsg ?>

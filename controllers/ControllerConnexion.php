@@ -5,7 +5,10 @@ require_once('views/View.php');
 class ControllerConnexion
 {
     private $_view;
-    
+    private $_pseudo;
+    private $_password;
+    private $_errorMsg;
+
     public function __construct($url)
     {
         if(isset($url) && count($url) > 2)
@@ -16,11 +19,20 @@ class ControllerConnexion
         {
             if($url[1] === 'getCon')
             {
-                $this->getCon($_POST);
+                if(!empty($_POST['pseudo'] && !empty($_POST['password'])))
+                {
+                    $this->getCon($_POST);
+                }
+                else
+                {
+                    $this->_errorMsg = '<h2 class="error">Veuillez remplir tout les champs !</h2>';
+                    $this->connexion();
+                }
             }
             else
             {
-                throw new Exception('Page introuvable !');
+                $this->_errorMsg = '<h2 class="error">Le lien demandé n\'existe pas !</h2>';
+                $this->connexion();
             }
         }
         else
@@ -31,12 +43,16 @@ class ControllerConnexion
 
     private function connexion()
     {
+        $errorMsg = $this->_errorMsg;
         $this->_view = new View('Connexion');
-        $this->_view->generate(array('connexion' => ''));
+        $this->_view->generate(array('errorMsg' => $errorMsg));
     }
 
     private function getCon($array){
-       print_r($array);
+       $this->_pseudo = $array['pseudo'];
+       $this->_password = $array['password'];
+       print_r($this->_pseudo . ' ' . $this->_password);
+
     } 
 }
 

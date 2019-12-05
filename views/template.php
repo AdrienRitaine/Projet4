@@ -1,3 +1,5 @@
+<?php require('config.php'); ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,8 +8,8 @@
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/style<?= $style ?>.css">
+        <link rel="stylesheet" type="text/css" href="<?= $url ?>css/style.css">
+        <link rel="stylesheet" type="text/css" href="<?= $url ?>css/style<?= $style ?>.css">
     </head>
     <body>
     <!-- MENU -->
@@ -37,6 +39,6 @@
     <footer>
         <p>Par Ritaine Adrien !</p>
     </footer>
-    <script src="js/app.js"></script>
+    <script src="<?= $url ?>js/app.js"></script>
     </body>
 </html>

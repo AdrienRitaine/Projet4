@@ -1,10 +1,13 @@
 <?php
 
+
+
 class View
 {
     private $_file;
     private $_t;
     private $_style;
+    
 
     public function __construct($action)
     {
