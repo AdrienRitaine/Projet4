@@ -1,0 +1,196 @@
+/* ARTICLES */
+
+.articlesBloc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-flow: row wrap;
+    width: 100%;
+}
+
+.articles {
+    position: relative;
+    width: 450px;
+    min-width: 350px;
+    height: 200px;
+    background: #2c3e50;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 5px;
+    -webkit-box-shadow: 0px 5px 11px -5px #000000;
+    box-shadow: 0px 5px 11px -5px #000000;
+    user-select: none;
+}
+
+.articles:hover {
+    cursor: pointer;
+}
+
+.articlesContent {
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+}
+
+.articlesContent:hover {
+    left: -15px;
+}
+
+.articlesContent:hover .articlesDesc {
+    background: #34495e;
+}
+
+.articlesContent:hover .articlesDesc::before {
+    background: #34495e;
+    border-left: 340px solid rgba(41, 128, 185, 0.1);
+}
+
+.articlesContent:hover .articlesImage img {
+    left: 65%;
+    transform: translateX(-65%);
+    opacity: 0.7;
+}
+
+.articlesContent:hover .articlesImage i {
+    opacity: 1;
+    left: 45%;
+    top: 50%;
+    transform: translateX(-45%) translateY(-50%) scale(1.3);
+}
+
+.articlesDesc {
+    position: absolute;
+    float: right;
+    right: -30px;
+    background: #2c3e50;
+    width: 300px;
+    height: 200px;
+    z-index: 10;
+    padding-top: 0px;
+    transition: 0.7s;
+}
+
+.articlesDesc h2 {
+    position: relative;
+    z-index: 4;
+    font-family: Roboto;
+    font-weight: 300;
+    color: white;
+    margin-right: 40px;
+}
+
+.articlesDesc p {
+    position: relative;
+    z-index: 4;
+    font-family: Roboto;
+    font-weight: 100;
+    color: white;
+    margin-right: 40px;
+}
+
+.articlesInfos {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    padding-right: 50px;
+}
+
+.infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infos p,
+i {
+    color: #3498db;
+}
+
+.infos i {
+    margin-right: 10px;
+}
+
+.articlesDesc::before {
+    position: absolute;
+    content: '';
+    width: 70px;
+    height: 300px;
+    background: #2c3e50;
+    left: -30px;
+    top: -55px;
+    transform: rotate(-5deg);
+    z-index: 2;
+    border-left: 0px solid rgba(41, 128, 185, 0.9);
+    transition: 0.7s;
+}
+
+.articlesImage {
+    position: relative;
+    float: left;
+    left: 0;
+    width: 180px;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.articlesImage img {
+    position: relative;
+    height: 200px;
+    left: 60%;
+    transform: translateX(-60%);
+    transition: 0.4s;
+}
+
+.articlesImage i {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translateX(-40%) translateY(-50%);
+    z-index: 10;
+    color: white;
+    font-size: 2.5em;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+
+@media screen and (max-width: 500px) {
+    /* ARTICLES */
+    .articles {
+        width: 350px;
+    }
+    .articlesDesc {
+        width: 60%;
+        padding-top: 0;
+    }
+    .articlesDesc p {
+        display: inline-block;
+        top: -35px;
+        height: 65px;
+        overflow: hidden;
+    }
+    .articlesInfos {
+        justify-content: space-around;
+        padding-right: 50px;
+        top: -20px;
+        margin: 0;
+    }
+    .infos {
+        height: 40px;
+    }
+    .infos p {
+        margin-top: 135px;
+        margin-right: 10px;
+    }
+    .infos i {
+        margin-right: 4px;
+    }
+}

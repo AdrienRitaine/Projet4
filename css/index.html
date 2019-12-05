@@ -1,0 +1,131 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <!-- MENU -->
+
+    <nav id="nav">
+        <div>
+            <h1 class="logo">RITAINE</h1>
+            <h1 class="logo">Adrien</h1>
+        </div>
+        <i class="fas fa-bars menu_resp" id="menu_resp"></i>
+        <div class="menu_lien" id="menu_lien">
+            <div class="menu_liens">
+                <i class="fas fa-times menu_resp_close" id="menu_resp_close"></i>
+                <a class="nav-link" href="#">Accueil</a>
+                <a class="nav-link" href="#">Actualité</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- TITRE -->
+
+    <div class="sectionTitre">
+        <i class="far fa-clock"></i>
+        <h2>Les derniers articles</h2>
+    </div>
+
+    <!-- ARTICLES -->
+
+    <div class="articlesBloc">
+        <a href="file:///C:/Users/Adrien/Desktop/test/articles/articles.html" target="_blank">
+            <div class="articles">
+                <div class="articlesContent">
+                    <div class="articlesDesc">
+                        <h2>La guerre des chats</h2>
+                        <div class="articlesInfos">
+                            <div class="Infos">
+                                <i class="fas fa-calendar-alt"></i>
+                                <p>16/10/2019</p>
+                            </div>
+                            <div class="Infos">
+                                <i class="fas fa-pen"></i>
+                                <p>Jean</p>
+                            </div>
+                        </div>
+                        <p>Duis neque mi, vulputate non convallis id, mattis quis libero. Etiam dignissim tortor accumsan elit imperdiet laoreet.</p>
+                    </div>
+                    <div class="articlesImage">
+                        <i class="fas fa-search-plus"></i>
+                        <img src="https://inst.eecs.berkeley.edu/~cs194-26/fa16/upload/files/proj3/cs194-26-aaq/img_warmup/cat.jpg">
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a href="http://iwallpapers2.free.fr/images/Chien/Chien_photographie_HD.jpg" target="_blank">
+            <div class="articles">
+                <div class="articlesContent">
+                    <div class="articlesDesc">
+                        <h2>La guerre des chiens</h2>
+                        <div class="articlesInfos">
+                            <div class="Infos">
+                                <i class="fas fa-calendar-alt"></i>
+                                <p>16/10/2019</p>
+                            </div>
+                            <div class="Infos">
+                                <i class="fas fa-pen"></i>
+                                <p>Jean</p>
+                            </div>
+                        </div>
+                        <p>Duis neque mi, vulputate non convallis id, mattis quis libero. Etiam dignissim tortor accumsan elit imperdiet laoreet.</p>
+                    </div>
+                    <div class="articlesImage">
+                        <i class="fas fa-search-plus"></i>
+                        <img src="http://iwallpapers2.free.fr/images/Chien/Chien_photographie_HD.jpg">
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- LOGFORM -->
+
+    <div class="logForm">
+        <div class="chooseForm">
+            <a id="connexion">CONNEXION</a>
+            <a id="inscrire">S'INSCRIRE</a>
+        </div>
+        <div class="loginForm" id="loginForm">
+            <form class="formBloc">
+                <label for="pseudo"><i class="fas fa-user"></i> Pseudo</label>
+                <input class="pseudo inputText" type="text" name="pseudo">
+                <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
+                <input class="password inputText" type="password" name="password">
+                <div class="inputCheckbox">
+                    <input class="save" type="checkbox" name="save">
+                    <label for="save">Se souvenir de moi ?</label>
+                </div>
+                <input class="submit" type="submit" name="submit" value="SE CONNECTER">
+            </form>
+            <a href="#">Mot de passe oublié ?</a>
+        </div>
+
+        <div class="signinForm" id="signinForm">
+            <form class="formBloc">
+                <label for="pseudo"><i class="fas fa-user"></i> Pseudo</label>
+                <input class="pseudo inputText" type="text" name="pseudo">
+                <label for="pseudo"><i class="fas fa-envelope"></i> E-mail</label>
+                <input class="pseudo inputText" type="email" name="email">
+                <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
+                <input class="password inputText" type="password" name="password">
+                <input class="submit" type="submit" name="submit" value="S'INSCRIRE">
+            </form>
+        </div>
+    </div>
+
+    <!-- PAGE ARTICLES -->
+
+    <script src="app.js"></script>
+</body>
+
+</html>
