@@ -33,6 +33,22 @@ abstract class Model
         return $var;
         $req->closeCursor();
     }
+
+    protected function getWhere($table, $array)
+    {
+        $var = [];
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
+        $req->execute();
+        if($req->rowCount() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        $req->closeCursor();
+    }
 }
 
 ?>

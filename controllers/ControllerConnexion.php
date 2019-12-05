@@ -1,10 +1,11 @@
 <?php
 
 require_once('views/View.php');
-
+require_once('models/conRegManager.php');
 class ControllerConnexion
 {
     private $_view;
+    private $_con;
     private $_pseudo;
     private $_password;
     private $_errorMsg;
@@ -19,7 +20,7 @@ class ControllerConnexion
         {
             if($url[1] === 'getCon')
             {
-                if(!empty($_POST['pseudo'] && !empty($_POST['password'])))
+                if(!empty($_POST['pseudo']) && !empty($_POST['password']))
                 {
                     $this->getCon($_POST);
                 }
@@ -28,6 +29,10 @@ class ControllerConnexion
                     $this->_errorMsg = '<h2 class="error">Veuillez remplir tout les champs !</h2>';
                     $this->connexion();
                 }
+            }
+            else if($url[1] === 'deconnexion')
+            {
+                $this->deconnexion();
             }
             else
             {
@@ -43,15 +48,56 @@ class ControllerConnexion
 
     private function connexion()
     {
-        $errorMsg = $this->_errorMsg;
-        $this->_view = new View('Connexion');
-        $this->_view->generate(array('errorMsg' => $errorMsg));
+        $this->_con = new conRegManager();
+        if($this->_con->verifyUser($_SESSION['pseudo'], $_SESSION['password']))
+        {
+            $articleManager = new ArticleManager;
+            $articles = $articleManager->getArticles();
+            $this->_view = new View('Accueil');
+            $this->_view->generate(array('articles' => $articles));
+        }
+        else
+        {
+            $errorMsg = $this->_errorMsg;
+            $this->_view = new View('Connexion');
+            $this->_view->generate(array('errorMsg' => $errorMsg));
+            
+        }
+        
+    }
+
+    private function deconnexion()
+    {
+        if(isset($_SESSION))
+        {
+            $_SESSION['pseudo'] = '';
+            $_SESSION['password'] = '';
+            $_SESSION['connected'] = "no";
+            $this->connexion();
+        }
+        else
+        {
+            $this->connexion();
+        }       
     }
 
     private function getCon($array){
        $this->_pseudo = $array['pseudo'];
        $this->_password = $array['password'];
-       print_r($this->_pseudo . ' ' . $this->_password);
+       $this->_con = new conRegManager();
+       if($this->_con->verifyUser($this->_pseudo, $this->_password))
+       {
+        $_SESSION['pseudo'] = $this->_pseudo;
+        $_SESSION['password'] = $this->_password;
+        $_SESSION['connected'] = "yes";
+        $this->_errorMsg = '<h2 class="error">Vous étes connecter !</h2>';
+        $this->connexion();
+       }
+       else
+       {
+        $this->_errorMsg = '<h2 class="error">Mot de passe ou pseudo incorrect !</h2>';
+        $this->connexion();
+       }
 
     } 
 }

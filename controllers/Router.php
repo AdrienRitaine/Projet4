@@ -1,6 +1,7 @@
 <?php
 
 require_once('views/View.php');
+session_start();
 
 class Router
 {

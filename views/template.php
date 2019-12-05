@@ -1,4 +1,7 @@
-<?php require('config.php'); ?>
+<?php 
+require('config.php'); 
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +29,11 @@
                 <a class="nav-link" href="http://localhost/projet4/Accueil">Accueil</a>
                 <a class="nav-link" href="#">Chapitres</a>
                 <a class="nav-link" href="#">Contact</a>
-                <a class="nav-link" href="http://localhost/projet4/Connexion">Connexion</a>
+                <?php if($_SESSION['connected'] === "yes"){?>
+                    <a class="nav-link conButton" href="<?= $url ?>Connexion/deconnexion">Déconnexion</a>
+                <?php }else{ ?>
+                    <a class="nav-link conButton" href="http://localhost/projet4/Connexion">Connexion</a>
+                <?php } ?>
             </div>
         </div>
     </nav>

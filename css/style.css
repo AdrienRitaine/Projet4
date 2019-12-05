@@ -3,11 +3,14 @@
 body {
     background-color: #222f3e;
     margin: 0;
-    padding: 100px 0 0 0;
 }
 
 
 /* MENU */
+
+#nav .conButton {
+    color: #FB667A;
+}
 
 #nav {
     background: rgba(0, 0, 0, 0.5);
@@ -103,7 +106,8 @@ body {
 }
 
 footer{
-    position: absolute;
+    position: fixed;
+    z-index: 2;
     bottom: 0;
     width: 100%;
     background-color: #2c3e50;
