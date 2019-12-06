@@ -3,6 +3,13 @@
 require_once('views/View.php');
 session_start();
 
+if(empty($_SESSION['pseudo']) AND empty($_SESSION['password']) AND empty($_SESSION['connected'])){
+    $_SESSION['pseudo'] ='';
+    $_SESSION['password'] = '';
+    $_SESSION['connected'] = '';
+}
+
+
 class Router
 {
     private $_ctrl;

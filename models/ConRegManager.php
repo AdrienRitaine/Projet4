@@ -2,6 +2,8 @@
 
 class ConRegManager extends Model
 {
+
+    // Créer un tableau pour traiter les données
     public function verifyUser($pseudo, $password)
     {
         $data = array(
@@ -10,7 +12,7 @@ class ConRegManager extends Model
         );
 
         $this->getBdd();
-        return $this->getWhere('utilisateurs', $data);
+        return $this->getWhereUser('utilisateurs', $data);
     }
 }
 

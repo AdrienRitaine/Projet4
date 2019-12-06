@@ -26,13 +26,13 @@ require('config.php');
         <div class="menu_lien" id="menu_lien">
             <div class="menu_liens">
                 <i class="fas fa-times menu_resp_close" id="menu_resp_close"></i>
-                <a class="nav-link" href="http://localhost/projet4/Accueil">Accueil</a>
+                <a class="nav-link" href="<?= $url ?>Accueil">Accueil</a>
                 <a class="nav-link" href="#">Chapitres</a>
                 <a class="nav-link" href="#">Contact</a>
                 <?php if($_SESSION['connected'] === "yes"){?>
                     <a class="nav-link conButton" href="<?= $url ?>Connexion/deconnexion">Déconnexion</a>
                 <?php }else{ ?>
-                    <a class="nav-link conButton" href="http://localhost/projet4/Connexion">Connexion</a>
+                    <a class="nav-link conButton" href="<?= $url ?>Connexion">Connexion</a>
                 <?php } ?>
             </div>
         </div>

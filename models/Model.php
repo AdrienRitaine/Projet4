@@ -34,9 +34,9 @@ abstract class Model
         $req->closeCursor();
     }
 
-    protected function getWhere($table, $array)
+    // Renvoi un bool si l'utilisateur exister ou non
+    protected function getWhereUser($table, $array)
     {
-        $var = [];
         $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
         $req->execute();
         if($req->rowCount() > 0)

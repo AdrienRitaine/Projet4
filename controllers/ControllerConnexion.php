@@ -1,7 +1,7 @@
 <?php
 
 require_once('views/View.php');
-require_once('models/conRegManager.php');
+require_once('models/ConRegManager.php');
 class ControllerConnexion
 {
     private $_view;
@@ -46,6 +46,7 @@ class ControllerConnexion
         }
     }
 
+    // Envoi vers la vue approprié 
     private function connexion()
     {
         $this->_con = new conRegManager();
@@ -66,6 +67,7 @@ class ControllerConnexion
         
     }
 
+    // Gestion de la déconnexion
     private function deconnexion()
     {
         if(isset($_SESSION))
@@ -81,9 +83,10 @@ class ControllerConnexion
         }       
     }
 
+    // Gestion de la connexion 
     private function getCon($array){
-       $this->_pseudo = $array['pseudo'];
-       $this->_password = $array['password'];
+       $this->_pseudo = htmlspecialchars($array['pseudo']); 
+       $this->_password = sha1(htmlspecialchars($array['password']));
        $this->_con = new conRegManager();
        if($this->_con->verifyUser($this->_pseudo, $this->_password))
        {
