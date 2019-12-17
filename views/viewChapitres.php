@@ -1,16 +1,10 @@
 <?php
-
-$this->_t = "Accueil";
-$this->_style = "Accueil";
+$this->_t = "Chapitres";
+$this->_style = "Chapitres";
 require('config.php');
 
 ?>
 
-
-<header>
-    <h2>Jean Forteroche</h2>
-    <cite>"Un billet simple pour l'Alaska."</cite>
-</header>
 <section class="section">
     <div class="sectionExtrait">
      <?php foreach($articles as $article): ?>
@@ -24,7 +18,7 @@ require('config.php');
                 <div class="extraitInfo">
                     <i class="fas fa-pen"></i>
                     <p><?= $article->auteur() ?></p>
-                </div>       
+                </div>
             </div>
             <div class="extraitDesc">
                 <h2><?= $article->titre() ?></h2>

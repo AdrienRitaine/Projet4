@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Calistoga&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+body {
+    background: url('../img/back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 100px 0;
+}
+
+/* SECTION */
+
+.section{
+    padding: 25px 0 25px 0;
+    width: 100%;
+    background: #222f3e;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 500px;
+}
+
+/* ARTICLES 2 */
+
+
+.sectionExtrait{
+    width: 900px;
+    margin: 0 170px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.extraitBloc{
+    position: relative;
+    width: 350px;
+    background: #2c3e50;
+    color: white;
+    font-family: Roboto;
+    border-radius: 5px;
+    margin: 30px 30px;
+    overflow: hidden;
+    cursor: default;
+}
+
+.extraitImg{
+    position: relative;
+    width: 100%;
+    transition: 0.3s all;
+}
+
+.extraitPlus{
+    position: absolute;
+    font-size: 3em;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 75px;
+    color: #2c3e50;
+    transition: 0.3s all;
+    opacity: 0;
+}
+
+.extraitDesc{
+    margin: 10px 20px;
+}
+
+.extraitDesc h2{
+    transition: 0.3s all;
+}
+
+.extraitDesc p{
+    font-weight: 100;
+    height: 115px;
+    overflow: hidden;
+}
+
+.extraitDesc a{
+    color: white;
+}
+
+.extraitInfos{
+    display: flex;
+    margin-bottom: -20px;
+}
+
+.extraitInfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 5px 10px;
+}
+
+.extraitInfo i{
+    margin: 10px;
+}
+
+.extraitBloc:hover .extraitImg{
+    filter: sepia(100%);
+    transform: scale(1.1);
+}
+.extraitBloc:hover .extraitPlus{
+    opacity: 1;
+}
+
+.extraitBloc:hover .extraitDesc h2{
+    color: #FB667A;
+}
+
+
+
+@media screen and (max-width: 500px) {
+    .infos {
+        height: 40px;
+    }
+    .infos p {
+        margin-top: 135px;
+        margin-right: 10px;
+    }
+    .infos i {
+        margin-right: 4px;
+    }
+}

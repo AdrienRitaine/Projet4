@@ -11,8 +11,8 @@ require('config.php');
         <meta name="viewport" content="width=device-width, user-scalable=no">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="<?= $url ?>css/style.css">
-        <link rel="stylesheet" type="text/css" href="<?= $url ?>css/style<?= $style ?>.css">
+        <link rel="stylesheet" type="text/css" href="<?= $url ?>assets/css/style.css">
+        <link rel="stylesheet" type="text/css" href="<?= $url ?>assets/css/style<?= $style ?>.css">
     </head>
     <body>
     <!-- MENU -->
@@ -27,7 +27,7 @@ require('config.php');
             <div class="menu_liens">
                 <i class="fas fa-times menu_resp_close" id="menu_resp_close"></i>
                 <a class="nav-link" href="<?= $url ?>Accueil">Accueil</a>
-                <a class="nav-link" href="#">Chapitres</a>
+                <a class="nav-link" href="<?= $url ?>Chapitres">Chapitres</a>
                 <a class="nav-link" href="#">Contact</a>
                 <?php if($_SESSION['connected'] === "yes"){?>
                     <a class="nav-link conButton" href="<?= $url ?>Connexion/deconnexion">Déconnexion</a>
@@ -46,6 +46,6 @@ require('config.php');
     <footer>
         <p>Par Ritaine Adrien !</p>
     </footer>
-    <script src="<?= $url ?>js/app.js"></script>
+    <script src="<?= $url ?>assets/js/app.js"></script>
     </body>
 </html>
