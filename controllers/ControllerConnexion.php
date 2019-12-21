@@ -10,6 +10,7 @@ class ControllerConnexion
     private $_password;
     private $_errorMsg;
 
+
     public function __construct($url)
     {
         if(isset($url) && count($url) > 2)
