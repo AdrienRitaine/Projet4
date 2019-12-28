@@ -49,6 +49,31 @@ abstract class Model
         }
         $req->closeCursor();
     }
+
+    protected function getWhereUserInfo($table, $array, $info)
+    {
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
+        $req->execute();
+        foreach($req as $donnees){
+            return $donnees[$info];
+        }
+        $req->closeCursor();
+    }
+
+    protected function addData($table, $array)
+    {
+        foreach($array as $key => $value)
+        {
+            $k[] = $key;
+            $v[] = "'" . $value . "'";
+        }
+
+        $k = implode(",", $k);
+        $v = implode(",", $v);
+
+        $req = self::$_bdd->prepare("INSERT INTO " . $table . " (" . $k . ") VALUES (" . $v . ")");
+        $req->execute();
+    }
 }
 
 ?>

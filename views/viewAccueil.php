@@ -24,7 +24,7 @@ require('config.php');
                 <div class="extraitInfo">
                     <i class="fas fa-pen"></i>
                     <p><?= $article->auteur() ?></p>
-                </div>       
+                </div>
             </div>
             <div class="extraitDesc">
                 <h2><?= $article->titre() ?></h2>
