@@ -1,7 +1,8 @@
 <?php
 
 require_once('views/View.php');
-require_once('models/ConRegManager.php');
+require_once('models/UserManager.php');
+
 class ControllerConnexion
 {
     private $_view;
@@ -44,6 +45,22 @@ class ControllerConnexion
                     $this->connexion();
                 }
             }
+            else if($url[1] === 'lostpassword')
+            {
+                $this->lostPassword();
+            }
+            else if($url[1] === 'lostPassword')
+            {
+                if(!empty($_POST['email']))
+                {
+                    $this->lostPasswordMail($_POST);
+                }
+                else
+                {
+                    $this->_errorMsg = '<h2 class="error">Veuillez remplir tout les champs !</h2>';
+                    $this->lostPassword();
+                }
+            }
             else if($url[1] === 'deconnexion')
             {
                 $this->deconnexion();
@@ -63,7 +80,7 @@ class ControllerConnexion
     // Envoi vers la vue approprié 
     private function connexion()
     {
-        $this->_con = new conRegManager();
+        $this->_con = new UserManager();
         if($this->_con->verifyUser($_SESSION['pseudo'], $_SESSION['password']))
         {
             $articleManager = new ArticleManager;
@@ -76,7 +93,6 @@ class ControllerConnexion
             $errorMsg = $this->_errorMsg;
             $this->_view = new View('Connexion');
             $this->_view->generate(array('errorMsg' => $errorMsg));
-            
         }
         
     }
@@ -102,7 +118,7 @@ class ControllerConnexion
     private function getCon($array){
        $this->_pseudo = htmlspecialchars($array['pseudo']); 
        $this->_password = sha1(htmlspecialchars($array['password']));
-       $this->_con = new conRegManager();
+       $this->_con = new UserManager();
        if($this->_con->verifyUser($this->_pseudo, $this->_password)) // Vérification de l'utilisateur
        {
         $this->_permission = $this->_con->getInfoUser($this->_pseudo, $this->_password, 'permission'); // Récupération de la permission
@@ -128,10 +144,75 @@ class ControllerConnexion
         $this->_email = htmlspecialchars($array['email']);
         $this->_password = sha1(htmlspecialchars($array['password']));
 
-        $this->_con = new conRegManager();
-        $this->_con->userRegister($this->_pseudo, $this->_email, $this->_password);
-        $this->_errorMsg = "<script> Toast.fire({icon: 'success',  title: 'Inscription réussi !'}) </script>";
-        $this->connexion();
+        $this->_con = new UserManager();
+        if($this->_con->verifyInfo('pseudo', $this->_pseudo))
+        {
+            $this->_errorMsg = "<h2 class=\"error\">Pseudo non disponible.</h2>";
+            $this->connexion();
+        }
+        else
+        {
+            if($this->_con->verifyInfo('email', $this->_email))
+            {
+                $this->_errorMsg = "<h2 class=\"error\">L'e-mail choisi existe déjà.</h2>";
+                $this->connexion();
+            }
+            else
+            {
+                $this->_con->userRegister($this->_pseudo, $this->_email, $this->_password);
+                $this->_errorMsg = "<script> Toast.fire({icon: 'success',  title: 'Inscription réussi !'}) </script>";
+                $this->connexion();
+            }
+        }
+    }
+
+    private function lostPassword()
+    {
+        $errorMsg = $this->_errorMsg;
+        $this->_view = new View('LostPassword');
+        $this->_view->generate(array('errorMsg' => $errorMsg));
+    }
+
+    private function lostPasswordMail($array)
+    {
+        require('config.php');
+        $this->_email = $array['email'];
+        $this->_con = new UserManager();
+        if($this->_con->verifyInfo('email', $this->_email))
+        {
+            foreach($this->_con->getRecovery($this->_email) AS $row)
+            {
+                $recovery_code = $row['recovery'];
+                $id = $row['id'];
+                $pseudo = $row['pseudo'];
+            }
+
+            $header="MIME-Version: 1.0\r\n";
+            $header.='From:"ProjetS2SN"<projets2sn@gmail.com>'."\n";
+            $header.='Content-Type:text/html; charset="utf-8"'."\n";
+            $header.='Content-Transfert-Encoding: 8bit';
+
+            $message = '
+						<html>
+							<body>
+								<div align="center">
+									<strong><h1>Mot de passe oublié</h1></strong>'."\n".
+                'Bonjour <strong>'. $pseudo . '</strong> , Veuillez cliquer sur le lien ci-dessous.<br>' ."\n".'
+							Lien de réinitialisation : '. $url . "user/resetPassword/". $recovery_code.'/'.$id.'
+								</div>
+							</body>
+						</html>
+						';
+
+            mail($this->_email, "Oublie de mot de passe", $message, $header);
+
+            $this->_errorMsg = '<script> Toast.fire({icon: \'success\',  title: \'Lien envoyé par email !\'}) </script>';
+            $this->connexion();
+        }
+        else
+        {
+            print_r('NON');
+        }
     }
 }
 

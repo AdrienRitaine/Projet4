@@ -50,6 +50,7 @@ abstract class Model
         $req->closeCursor();
     }
 
+    //Retourne une information de l'utilisateur
     protected function getWhereUserInfo($table, $array, $info)
     {
         $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
@@ -60,6 +61,7 @@ abstract class Model
         $req->closeCursor();
     }
 
+    // Ajout de donnée dans la bdd
     protected function addData($table, $array)
     {
         foreach($array as $key => $value)
@@ -73,6 +75,53 @@ abstract class Model
 
         $req = self::$_bdd->prepare("INSERT INTO " . $table . " (" . $k . ") VALUES (" . $v . ")");
         $req->execute();
+    }
+
+    // Vérifie une information dans le base de donnée
+    protected function verifyInfomation($info, $data)
+    {
+        $req = self::$_bdd->prepare('SELECT * FROM utilisateurs WHERE '.$info.'=\''.$data.'\'');
+        $req->execute();
+        if($req->rowCount() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        $req->closeCursor();
+    }
+
+    protected function getRecoveryId($email)
+    {
+        $req = self::$_bdd->prepare("SELECT * FROM utilisateurs WHERE email='".$email."'");
+        $req->execute();
+        return $req;
+        $req->closeCursor();
+    }
+
+    protected function verifyRecovery($recovery, $id)
+    {
+        $req = self::$_bdd->prepare('SELECT * FROM utilisateurs WHERE id=\''.$id.'\' AND recovery=\''.$recovery.'\'');
+        $req->execute();
+        if($req->rowCount() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        $req->closeCursor();
+    }
+
+    protected function resetPassword($recovery, $id, $password)
+    {
+        $newrecovery = rand();
+        $req = self::$_bdd->prepare('UPDATE utilisateurs SET motdepasse=\'' . $password . '\' ,recovery=\'' . $newrecovery. '\'' .'WHERE id=\''. $id .'\' AND recovery=\'' . $recovery . '\'');
+        $req->execute();
+        $req->closeCursor();
     }
 }
 

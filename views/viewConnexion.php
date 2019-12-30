@@ -22,7 +22,7 @@
                 </div>
                 <input class="submit" type="submit" name="submit" value="SE CONNECTER">
             </form>
-            <a href="#">Mot de passe oublié ?</a>
+            <a href="<?= $url ?>connexion/lostpassword">Mot de passe oublié ?</a>
         </div>
 
         <div class="signinForm" id="signinForm">
