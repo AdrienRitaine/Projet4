@@ -58,7 +58,7 @@ class Router
         catch(Exception $e)
         {
             $errorMsg = $e->getMessage();
-            $this->_view = new View('Error');
+            $this->_view = new View('Error' , 0);
             $this->_view->generate(array('errorMsg' => $errorMsg));
         }
     }

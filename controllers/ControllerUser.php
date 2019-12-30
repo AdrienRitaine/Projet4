@@ -81,7 +81,7 @@ class ControllerUser
     private function resetForm()
     {
         $infos = $this->_infos;
-        $this->_view = new View('ResetForm');
+        $this->_view = new View('ResetForm', 0);
         $this->_view->generate(array('infos' => $infos));
     }
 
@@ -96,7 +96,7 @@ class ControllerUser
         {
             $this->_con->updatePassword($this->_recovery, $this->_id, $this->_password);
             $errorMsg = '<script> Toast.fire({icon: \'success\',  title: \'Mot de passe changé !\'}) </script>';
-            $this->_view = new View('Connexion');
+            $this->_view = new View('Connexion', 0);
             $this->_view->generate(array('errorMsg' => $errorMsg));
         }
         else

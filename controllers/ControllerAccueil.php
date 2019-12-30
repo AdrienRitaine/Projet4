@@ -24,7 +24,7 @@ class ControllerAccueil
         $this->_articleManager = new ArticleManager;
         $articles = $this->_articleManager->getArticles();
 
-       $this->_view = new View('Accueil');
+       $this->_view = new View('Accueil', 0);
        $this->_view->generate(array('articles' => $articles));
     }
 }

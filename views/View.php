@@ -7,11 +7,12 @@ class View
     private $_file;
     private $_t;
     private $_style;
-    
+    private $_template;
 
-    public function __construct($action)
+    public function __construct($action, $template)
     {
         $this->_file = 'views/view'.$action.'.php';
+        $this->_template = $template;
     }
 
     // Génére & affiche la vue
@@ -20,7 +21,19 @@ class View
         $content = $this->generateFile($this->_file, $data);
     
         // Template
-        $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'style' => $this->_style, 'content' => $content));
+        if($this->_template == 0)
+        {
+            $view = $this->generateFile('views/templates/template.php', array('t' => $this->_t, 'style' => $this->_style, 'content' => $content));
+        }
+        else if ($this->_template == 1)
+        {
+            $view = $this->generateFile('views/templates/templatePanel.php', array('t' => $this->_t, 'style' => $this->_style, 'content' => $content));
+        }
+        else
+        {
+            throw new Exception('Page introuvable !');
+        }
+
 
         echo $view;
     }

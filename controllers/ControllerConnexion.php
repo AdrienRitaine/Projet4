@@ -85,13 +85,13 @@ class ControllerConnexion
         {
             $articleManager = new ArticleManager;
             $articles = $articleManager->getArticles();
-            $this->_view = new View('Accueil');
+            $this->_view = new View('Accueil', 0);
             $this->_view->generate(array('articles' => $articles));
         }
         else
         {
             $errorMsg = $this->_errorMsg;
-            $this->_view = new View('Connexion');
+            $this->_view = new View('Connexion', 0);
             $this->_view->generate(array('errorMsg' => $errorMsg));
         }
         
@@ -169,7 +169,7 @@ class ControllerConnexion
     private function lostPassword()
     {
         $errorMsg = $this->_errorMsg;
-        $this->_view = new View('LostPassword');
+        $this->_view = new View('LostPassword', 0);
         $this->_view->generate(array('errorMsg' => $errorMsg));
     }
 

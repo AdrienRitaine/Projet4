@@ -24,7 +24,7 @@ class ControllerChapitres
         $this->_articleManager = new ArticleManager;
         $articles = $this->_articleManager->getArticles();
 
-        $this->_view = new View('Chapitres');
+        $this->_view = new View('Chapitres', 0);
         $this->_view->generate(array('articles' => $articles));
     }
 }
