@@ -74,7 +74,7 @@ class ControllerUser
         }
         else
         {
-            print_r('Lien invalide.');
+            throw new Exception('Lien invalide ou expiré !');
         }
     }
 
@@ -101,7 +101,7 @@ class ControllerUser
         }
         else
         {
-            print_r('Lien invalide.');
+            throw new Exception('Lien invalide ou expiré !');
         }
 
     }
