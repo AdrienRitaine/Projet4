@@ -8,6 +8,12 @@ class ArticleManager extends Model
         return $this->getAll('articles', 'Article');
     }
 
+    public function getChapitre($id)
+    {
+        $this->getBdd();
+        return $this->getRowById('articles', $id);
+    }
+
     public function addChapitre($data)
     {
         $this->getBdd();
@@ -18,6 +24,12 @@ class ArticleManager extends Model
     {
         $this->getBdd();
         $this->deleteDataById('articles', $id);
+    }
+
+    public function updateChapitre($data, $id)
+    {
+        $this->getBdd();
+        $this->updateChapitreById($data, $id);
     }
 }
 

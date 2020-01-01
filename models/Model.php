@@ -34,6 +34,14 @@ abstract class Model
         $req->closeCursor();
     }
 
+    protected function getRowById($table, $id)
+    {
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE id=' . $id);
+        $req->execute();
+        return $req;
+        $req->closeCursor();
+    }
+
     // Renvoi un bool si l'utilisateur existe ou non
     protected function getWhereUser($table, $array)
     {
@@ -127,6 +135,13 @@ abstract class Model
     protected function deleteDataById($table, $id)
     {
         $req = self::$_bdd->prepare('DELETE FROM ' . $table . ' WHERE id=' . $id);
+        $req->execute();
+        $req->closeCursor();
+    }
+
+    protected function updateChapitreById($data, $id)
+    {
+        $req = self::$_bdd->prepare('UPDATE articles SET titre=\'' . $data['titre'] . '\' ,contenu=\'' . $data['contenu']. '\'' .'WHERE id='. $id);
         $req->execute();
         $req->closeCursor();
     }
