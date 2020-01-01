@@ -22,7 +22,9 @@ require('config.php');
             </div>
             <div class="extraitDesc">
                 <h2><?= $article->titre() ?></h2>
-                <p><?= $article->contenu() ?></p>
+                <div>
+                    <p><?= $article->contenu() ?></p>
+                </div>
                 <a href="#">Lire plus...</a>
             </div>
         </div>

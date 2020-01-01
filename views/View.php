@@ -7,6 +7,7 @@ class View
     private $_file;
     private $_t;
     private $_style;
+    private $_titre;
     private $_template;
 
     public function __construct($action, $template)
@@ -27,7 +28,7 @@ class View
         }
         else if ($this->_template == 1)
         {
-            $view = $this->generateFile('views/templates/templatePanel.php', array('t' => $this->_t, 'style' => $this->_style, 'content' => $content));
+            $view = $this->generateFile('views/templates/templatePanel.php', array('t' => $this->_t, 'style' => $this->_style, 'titre' => $this->_titre, 'content' => $content));
         }
         else
         {

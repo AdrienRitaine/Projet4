@@ -38,8 +38,17 @@ header h2{
 	-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
     justify-content: center;
     margin-bottom: 500px;
+}
+
+.section h2
+{
+    font-weight: 500;
+    font-size: 1.6em;
 }
 
 /* ARTICLES 2 */
@@ -93,12 +102,19 @@ header h2{
 
 .extraitDesc p{
     font-weight: 100;
-    height: 115px;
     overflow: hidden;
 }
 
 .extraitDesc a{
     color: white;
+}
+
+.extraitDesc div
+{
+    margin-top: -20px;
+    margin-bottom: 15px;
+    height: 60px;
+    overflow: hidden;
 }
 
 .extraitInfos{
@@ -128,7 +144,6 @@ header h2{
 .extraitBloc:hover .extraitDesc h2{
     color: #FB667A;
 }
-
 /* ARTICLES */
 
 .articlesBloc {

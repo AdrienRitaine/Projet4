@@ -12,8 +12,12 @@ require('config.php');
     <cite>"Un billet simple pour l'Alaska."</cite>
 </header>
 <section class="section">
+    <h2>Dernières publication</h2>
     <div class="sectionExtrait">
-     <?php foreach($articles as $article): ?>
+        <?php
+            $i = 0;
+            foreach($articles as $article):
+         ?>
         <div class="extraitBloc">
             <img class="extraitImg" src="<?= $url ?>assets/img/header.png" alt="montagne">
             <div class="extraitInfos">
@@ -28,11 +32,16 @@ require('config.php');
             </div>
             <div class="extraitDesc">
                 <h2><?= $article->titre() ?></h2>
-                <p><?= $article->contenu() ?></p>
+                <div>
+                    <p><?= $article->contenu() ?></p>
+                </div>
                 <a href="#">Lire plus...</a>
             </div>
         </div>
-        <?php endforeach ?>
+        <?php
+            if (++$i == 2) break;
+            endforeach
+        ?>
     </div>
 </section>
 

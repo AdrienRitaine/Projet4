@@ -34,7 +34,7 @@ abstract class Model
         $req->closeCursor();
     }
 
-    // Renvoi un bool si l'utilisateur exister ou non
+    // Renvoi un bool si l'utilisateur existe ou non
     protected function getWhereUser($table, $array)
     {
         $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
@@ -120,6 +120,13 @@ abstract class Model
     {
         $newrecovery = rand();
         $req = self::$_bdd->prepare('UPDATE utilisateurs SET motdepasse=\'' . $password . '\' ,recovery=\'' . $newrecovery. '\'' .'WHERE id=\''. $id .'\' AND recovery=\'' . $recovery . '\'');
+        $req->execute();
+        $req->closeCursor();
+    }
+
+    protected function deleteDataById($table, $id)
+    {
+        $req = self::$_bdd->prepare('DELETE FROM ' . $table . ' WHERE id=' . $id);
         $req->execute();
         $req->closeCursor();
     }

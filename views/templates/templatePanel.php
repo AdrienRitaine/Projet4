@@ -11,6 +11,7 @@ require('config.php');
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.tiny.cloud/1/sot1e4swh8wx314p7zha40xfcd2e5lv73c654k0yzd1nwmjs/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<?= $url ?>assets/css/style<?= $style ?>.css">
 </head>
@@ -29,17 +30,36 @@ require('config.php');
         }
     })
 </script>
-<nav class="panelNav">
+
+<div class="navHeader">
+    <i class="fas fa-bars menu" id="navResp"></i>
+    <h2 class="menuTitle"><?= $titre ?></h2>
+</div>
+
+<nav class="panelNav" id="panelNav">
+    <i class="fas fa-window-close menuClose" id="navRespClose"></i>
     <a href="<?= $url ?>Accueil"><i class="fas fa-home"></i> Accueil</a>
-    <a href="<?= $url ?>membres"><i class="fas fa-users"></i> Membres</a>
-    <a href="#"><i class="fas fa-comments"></i> Commentaires</a>
-    <a href="#"><i class="fas fa-edit"></i> Chapitres</a>
+    <a href="<?= $url ?>panel/membres"><i class="fas fa-users"></i> Membres</a>
+    <a href="<?= $url ?>Panel/signalement"><i class="fas fa-comments"></i> Signalement</a>
+    <a href="<?= $url ?>Panel/chapitre"><i class="fas fa-edit"></i> Chapitres</a>
 </nav>
 
 <!-- CONTENU -->
 <?= $content ?>
 
 
-<script src="<?= $url ?>assets/js/app.js"></script>
+<script>
+    document.getElementById('navResp').addEventListener('click', (e) => {
+        document.getElementById('panelNav').style.left = 0;
+        document.getElementById('navResp').style.display = "none";
+        document.getElementById('navRespClose').style.display = "block";
+    });
+
+    document.getElementById('navRespClose').addEventListener('click', (e) => {
+        document.getElementById('panelNav').style.left = '-100%';
+        document.getElementById('navResp').style.display = "block";
+        document.getElementById('navRespClose').style.display = "none";
+    });
+</script>
 </body>
 </html>
