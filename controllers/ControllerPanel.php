@@ -11,7 +11,9 @@ class ControllerPanel
     private $_titre;
     private $_contenu;
     private $_auteur;
-
+    /**
+     * @var ArticleManager
+     */
     public function __construct($url)
     {
         if($url && count($url) > 3)
@@ -63,6 +65,28 @@ class ControllerPanel
                     throw new Exception('Page introuvable !! ');
                 }
             }
+            else if($url[1] === 'deleteComment')
+            {
+                if(isset($url[2]))
+                {
+                    $this->deleteComment($url['2']);
+                }
+                else
+                {
+                    throw new Exception('Page introuvable !! ');
+                }
+            }
+            else if($url[1] === 'acceptComment')
+            {
+                if(isset($url[2]))
+                {
+                    $this->acceptComment($url['2']);
+                }
+                else
+                {
+                    throw new Exception('Page introuvable !! ');
+                }
+            }
             else if($url[1] === 'edit')
             {
                 if(isset($url[2]))
@@ -73,6 +97,10 @@ class ControllerPanel
                 {
                     throw new Exception('Page introuvable !! ');
                 }
+            }
+            else if($url[1] === 'signalement')
+            {
+                $this->signal();
             }
             else
             {
@@ -89,8 +117,8 @@ class ControllerPanel
     {
         if ($_SESSION['permission'] == 1)
         {
-            $this->_articleManager = new ArticleManager;
-            $this->_infos = array('article' => $this->_articleManager->getArticles(), 'erreur' => $this->_errorMsg);
+            $this->_con = new ArticleManager;
+            $this->_infos = array('article' => $this->_con->getArticles(), 'erreur' => $this->_errorMsg);
             $infos = $this->_infos;
 
             $this->_view = new View('Panel', 1);
@@ -165,6 +193,50 @@ class ControllerPanel
         }
     }
 
+    private function deleteComment($id)
+    {
+        if ($_SESSION['permission'] == 1)
+        {
+            if ($id)
+            {
+                $this->_con = new ArticleManager();
+                $this->_con->deleteComments(intval($id));
+                $this->signal();
+            }
+            else
+            {
+                throw new Exception('Page introuvable !');
+            }
+
+        }
+        else
+        {
+            throw new Exception('Permission non accordée ! ');
+        }
+    }
+
+    private function acceptComment($id)
+    {
+        if ($_SESSION['permission'] == 1)
+        {
+            if ($id)
+            {
+                $this->_con = new ArticleManager();
+                $this->_con->signalerComment(intval($id), 0);
+                $this->signal();
+            }
+            else
+            {
+                throw new Exception('Page introuvable !');
+            }
+
+        }
+        else
+        {
+            throw new Exception('Permission non accordée ! ');
+        }
+    }
+
     private function edit($id)
     {
         if ($_SESSION['permission'] == 1) {
@@ -208,6 +280,23 @@ class ControllerPanel
             );
 
             $this->_con->updateChapitre($data, $array['id']);
+        }
+        else
+        {
+            throw new Exception('Permission non accordée ! ');
+        }
+    }
+
+    private function signal()
+    {
+        if ($_SESSION['permission'] == 1)
+        {
+            $this->_con = new ArticleManager;
+            $this->_infos = array('comments' => $this->_con->getCommentBySignal(), 'erreur' => $this->_errorMsg);
+            $infos = $this->_infos;
+
+            $this->_view = new View('Signalement', 1);
+            $this->_view->generate(array('infos' => $infos));
         }
         else
         {

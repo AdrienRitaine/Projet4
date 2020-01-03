@@ -41,7 +41,6 @@ require('config.php');
                 <i class="fas fa-times menu_resp_close" id="menu_resp_close"></i>
                 <a class="nav-link" href="<?= $url ?>Accueil">Accueil</a>
                 <a class="nav-link" href="<?= $url ?>Chapitres">Chapitres</a>
-                <a class="nav-link" href="#">Contact</a>
                 <?php if($_SESSION['connected'] === "yes"){?>
                     <?php if($_SESSION['permission'] === "1"){?>
                         <a class="nav-link" href="<?= $url ?>Panel">Panel</a>
@@ -69,7 +68,6 @@ require('config.php');
         <div class="plan">
             <a href="<?= $url ?>Accueil">Accueil</a>
             <a href="<?= $url ?>Chapitres">Chapitres</a>
-            <a href="#">Contact</a>
             <?php if($_SESSION['connected'] === "yes"){?>
                 <?php if($_SESSION['permission'] === "1"){?>
                     <a href="<?= $url ?>Panel">Panel</a>

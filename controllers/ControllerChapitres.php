@@ -111,7 +111,7 @@ class ControllerChapitres
 
             $data = array(
                 'pseudo' => $_SESSION['pseudo'],
-                'commentaire' => htmlspecialchars($array['comment']),
+                'commentaire' => htmlspecialchars(addslashes($array['comment'])),
                 'date' => date("Y-m-d  H:i:s"),
                 'signalement' =>  0,
                 'id_article' => $id
@@ -136,7 +136,7 @@ class ControllerChapitres
         if($_SESSION['connected'] === 'yes')
         {
             $this->_con = new ArticleManager();
-            $this->_con->signalerComment($id);
+            $this->_con->signalerComment(intval($id),  1);
         }
         else
         {

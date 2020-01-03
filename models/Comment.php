@@ -53,7 +53,7 @@ class Comment
     {
         if(is_string($commentaire))
         {
-            $this->_commentaire = $commentaire;
+            $this->_commentaire = stripslashes($commentaire);
         }
     }
 

@@ -14,6 +14,12 @@ class ArticleManager extends Model
         return $this->getCommentsById('commentaires', 'Comment', $id);
     }
 
+    public function getCommentBySignal()
+    {
+        $this->getBdd();
+        return $this->getCommentsBySignals('commentaires', 'Comment');
+    }
+
     public function getChapitre($id)
     {
         $this->getBdd();
@@ -32,10 +38,10 @@ class ArticleManager extends Model
         $this->addData('commentaires', $data);
     }
 
-    public function signalerComment($id)
+    public function signalerComment($id, $signal)
     {
         $this->getBdd();
-        $this->signalerCommentById($id);
+        $this->signalerCommentById($id, $signal);
     }
 
     public function deleteChapter($id)
@@ -48,6 +54,12 @@ class ArticleManager extends Model
     {
         $this->getBdd();
         $this->updateChapitreById($data, $id);
+    }
+
+    public function deleteComments($id)
+    {
+        $this->getBdd();
+        $this->deleteDataById('commentaires', $id);
     }
 }
 

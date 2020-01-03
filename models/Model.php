@@ -47,6 +47,19 @@ abstract class Model
         $req->closeCursor();
     }
 
+    protected function getCommentsBySignals($table, $obj)
+    {
+        $var = [];
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE signalement=1');
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC))
+        {
+            $var[]= new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+    }
+
     protected function getRowById($table, $id)
     {
         $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE id=' . $id);
@@ -159,9 +172,9 @@ abstract class Model
         $req->closeCursor();
     }
 
-    protected function signalerCommentById($id)
+    protected function signalerCommentById($id, $signal)
     {
-        $req = self::$_bdd->prepare('UPDATE commentaires SET signalement=1' . ' WHERE id='. $id);
+        $req = self::$_bdd->prepare('UPDATE commentaires SET signalement=' . $signal . ' WHERE id='. $id);
         $req->execute();
         $req->closeCursor();
     }
