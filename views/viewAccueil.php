@@ -12,7 +12,7 @@ require('config.php');
     <cite>"Un billet simple pour l'Alaska."</cite>
 </header>
 <section class="section">
-    <h2>Dernières publication</h2>
+    <h2 class="sectionTitle">Dernières publication</h2>
     <div class="sectionExtrait">
         <?php
             $i = 0;
@@ -35,7 +35,7 @@ require('config.php');
                 <div>
                     <p><?= $article->contenu() ?></p>
                 </div>
-                <a href="#">Lire plus...</a>
+                <a href="<?= $url ?>Chapitres/v/<?= $article->id() ?>">Lire plus...</a>
             </div>
         </div>
         <?php

@@ -10,6 +10,111 @@ body {
     margin: 0;
 }
 
+.section
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    color: white;
+}
+
+.showChapitre
+{
+    background-color: #354b61;
+    padding: 30px;
+    width: 700px;
+    margin-bottom: 250px;
+}
+
+.showChapitre h2
+{
+    text-align: center;
+    color: #3498db;
+}
+
+.showChapitre p
+{
+    font-weight: 100;
+}
+
+.showChapitre .date
+{
+    font-weight: 300;
+    text-align: center;
+}
+
+.showChapitre form
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.showChapitre form textarea
+{
+    height: 60px;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    resize: none;
+}
+
+.showChapitre form input
+{
+    padding: 5px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    background-color: #e74c3c;
+    transition: 0.3s;
+}
+
+.showChapitre form input:hover
+{
+    background-color: #f1503f;
+    cursor: pointer;
+}
+
+.showChapitre hr
+{
+    color: rgba(255,255,255, 0.5);
+}
+
+.showChapitre .chapitreP
+{
+    font-weight: 900;
+}
+
+.showChapitre .chapitreP a
+{
+    color: #3498db;
+    font-weight: 500;
+}
+
+.signal
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: -15px;
+}
+
+.signal a
+{
+    position: relative;
+    top: 15px;
+    color: white;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.signal a:hover
+{
+    color: #de4232;
+}
+
 .panelNav
 {
     top: 0;
@@ -104,7 +209,7 @@ body {
     color: white;
 }
 
-.body table, th, td
+.body th, td
 {
     border-bottom: 1px solid #dedede;
 }
@@ -119,6 +224,11 @@ body {
 {
     color: #e74c3c;
     background-color: #2c3e50;
+}
+
+.body tr:nth-child(odd)
+{
+    background-color: #354b61;
 }
 
 .panelNav a:nth-child(1)

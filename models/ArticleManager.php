@@ -8,6 +8,12 @@ class ArticleManager extends Model
         return $this->getAll('articles', 'Article');
     }
 
+    public function getComments($id)
+    {
+        $this->getBdd();
+        return $this->getCommentsById('commentaires', 'Comment', $id);
+    }
+
     public function getChapitre($id)
     {
         $this->getBdd();
@@ -18,6 +24,18 @@ class ArticleManager extends Model
     {
         $this->getBdd();
         $this->addData('articles', $data);
+    }
+
+    public function addComment($data)
+    {
+        $this->getBdd();
+        $this->addData('commentaires', $data);
+    }
+
+    public function signalerComment($id)
+    {
+        $this->getBdd();
+        $this->signalerCommentById($id);
     }
 
     public function deleteChapter($id)

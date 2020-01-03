@@ -51,3 +51,8 @@
     position: relative;
     bottom: 110px;
 }
+
+footer
+{
+    display: none;
+}

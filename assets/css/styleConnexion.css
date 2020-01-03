@@ -182,3 +182,8 @@ input[type=email]:not(:focus):invalid {
     background-color: #3498db;
     cursor: pointer;
 }
+
+footer
+{
+    display: none;
+}

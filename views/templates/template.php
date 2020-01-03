@@ -60,7 +60,28 @@ require('config.php');
     <!-- PIED DE PAGE -->
 
     <footer>
-        <p>Par Ritaine Adrien !</p>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"> <i class="fab fa-twitter-square"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div class="plan">
+            <a href="<?= $url ?>Accueil">Accueil</a>
+            <a href="<?= $url ?>Chapitres">Chapitres</a>
+            <a href="#">Contact</a>
+            <?php if($_SESSION['connected'] === "yes"){?>
+                <?php if($_SESSION['permission'] === "1"){?>
+                    <a href="<?= $url ?>Panel">Panel</a>
+                <?php } ?>
+                <a href="<?= $url ?>Connexion/deconnexion">Déconnexion</a>
+            <?php }else{ ?>
+                <a href="<?= $url ?>Connexion">Connexion</a>
+            <?php } ?>
+        </div>
+        <div class="copy">
+            <p>© 2020 -<a href="https://adrien-ritaine.online"> RITAINE Adrien</a></p>
+        </div>
     </footer>
     <script src="<?= $url ?>assets/js/app.js"></script>
     </body>

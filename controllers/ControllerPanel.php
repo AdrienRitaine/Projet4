@@ -130,11 +130,12 @@ class ControllerPanel
             $data = array(
                 'titre' => $this->_titre,
                 'contenu' => $this->_contenu,
-                'date_creation' => date("Y-m-d"),
+                'date_creation' => date("Y-m-d  H:i:s"),
                 'auteur' =>  $this->_auteur
             );
 
             $this->_con->addChapitre($data);
+
         }
         else
         {

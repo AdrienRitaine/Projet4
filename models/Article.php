@@ -58,7 +58,7 @@ class Article
 
     public function setDate_Creation($date_creation)
     {
-        $this->_date_creation = $date_creation;
+        $this->_date_creation = date('d/m/Y', strtotime($date_creation));
     }
 
     public function setAuteur($auteur)

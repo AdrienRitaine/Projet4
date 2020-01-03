@@ -25,7 +25,7 @@ require('config.php');
                 <div>
                     <p><?= $article->contenu() ?></p>
                 </div>
-                <a href="#">Lire plus...</a>
+                <a href="<?= $url ?>Chapitres/v/<?= $article->id() ?>">Lire plus...</a>
             </div>
         </div>
         <?php endforeach ?>

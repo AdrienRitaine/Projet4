@@ -34,6 +34,19 @@ abstract class Model
         $req->closeCursor();
     }
 
+    protected function getCommentsById($table, $obj, $id)
+    {
+        $var = [];
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE id_article='.$id);
+        $req->execute();
+        while($data = $req->fetch(PDO::FETCH_ASSOC))
+        {
+            $var[]= new $obj($data);
+        }
+        return $var;
+        $req->closeCursor();
+    }
+
     protected function getRowById($table, $id)
     {
         $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE id=' . $id);
@@ -142,6 +155,13 @@ abstract class Model
     protected function updateChapitreById($data, $id)
     {
         $req = self::$_bdd->prepare('UPDATE articles SET titre=\'' . $data['titre'] . '\' ,contenu=\'' . $data['contenu']. '\'' .'WHERE id='. $id);
+        $req->execute();
+        $req->closeCursor();
+    }
+
+    protected function signalerCommentById($id)
+    {
+        $req = self::$_bdd->prepare('UPDATE commentaires SET signalement=1' . ' WHERE id='. $id);
         $req->execute();
         $req->closeCursor();
     }

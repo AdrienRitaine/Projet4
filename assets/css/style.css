@@ -109,18 +109,74 @@ body {
 }
 
 footer{
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    bottom: 5;
     width: 100%;
     background-color: #2c3e50;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     color: white;
     font-family: Roboto;
     font-weight: 100;
+    padding: 30px 0 0;
 }
+
+footer .social
+{
+    font-size: 2em;
+}
+
+footer .social *
+{
+    color: white;
+    margin: 0 5px;
+}
+
+footer .social *:hover
+{
+    color: #c1c1c1;
+}
+
+footer .plan
+{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+footer .plan a
+{
+    color: white;
+    text-decoration: none;
+    margin: 5px 5px;
+    letter-spacing: 1px;
+    font-size: 0.98em;
+}
+
+footer .plan a:hover
+{
+    color: #f1503f;
+}
+
+footer .copy a
+{
+    color: white;
+}
+
+footer .copy
+{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 1;
+    background-color: #222f3e;
+    width: 100%;
+    font-size: 0.9em;
+}
+
 
 .error{
     font-family: Roboto;
