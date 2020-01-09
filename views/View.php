@@ -1,7 +1,5 @@
 <?php
 
-
-
 class View
 {
     private $_file;
@@ -12,7 +10,7 @@ class View
 
     public function __construct($action, $template)
     {
-        $this->_file = 'views/view'.$action.'.php';
+        $this->_file = 'views/view'.ucfirst($action).'.php';
         $this->_template = $template;
     }
 
@@ -35,7 +33,6 @@ class View
             throw new Exception('Page introuvable !');
         }
 
-
         echo $view;
     }
 
@@ -46,7 +43,7 @@ class View
         {
             extract($data); 
 
-            ob_start();
+            ob_start('ob_gzhandler');
 
             require $file;
 

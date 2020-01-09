@@ -39,15 +39,15 @@ require('config.php');
         <div class="menu_lien" id="menu_lien">
             <div class="menu_liens">
                 <i class="fas fa-times menu_resp_close" id="menu_resp_close"></i>
-                <a class="nav-link" href="<?= $url ?>Accueil">Accueil</a>
-                <a class="nav-link" href="<?= $url ?>Chapitres">Chapitres</a>
+                <a class="nav-link" href="<?= $url ?>accueil">Accueil</a>
+                <a class="nav-link" href="<?= $url ?>chapitres">Chapitres</a>
                 <?php if($_SESSION['connected'] === "yes"){?>
                     <?php if($_SESSION['permission'] === "1"){?>
-                        <a class="nav-link" href="<?= $url ?>Panel">Panel</a>
+                        <a class="nav-link" href="<?= $url ?>panel">Panel</a>
                     <?php } ?>
-                    <a class="nav-link conButton" href="<?= $url ?>Connexion/deconnexion">Déconnexion</a>
+                    <a class="nav-link conButton" href="<?= $url ?>connexion/deconnexion">Déconnexion</a>
                 <?php }else{ ?>
-                    <a class="nav-link conButton" href="<?= $url ?>Connexion">Connexion</a>
+                    <a class="nav-link conButton" href="<?= $url ?>connexion">Connexion</a>
                 <?php } ?>
             </div>
         </div>

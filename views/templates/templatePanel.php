@@ -38,9 +38,10 @@ require('config.php');
 
 <nav class="panelNav" id="panelNav">
     <i class="fas fa-window-close menuClose" id="navRespClose"></i>
-    <a href="<?= $url ?>Accueil"><i class="fas fa-home"></i> Accueil</a>
-    <a href="<?= $url ?>Panel/signalement"><i class="fas fa-exclamation-triangle"></i> Signalement</a>
-    <a href="<?= $url ?>Panel/chapitre"><i class="fas fa-edit"></i> Chapitres</a>
+    <a href="<?= $url ?>accueil"><i class="fas fa-home"></i> Accueil</a>
+    <a href="<?= $url ?>panel/membres"><i class="fas fa-users"></i> Membres</a>
+    <a href="<?= $url ?>panel/signalement"><i class="fas fa-exclamation-triangle"></i> Signalement</a>
+    <a href="<?= $url ?>panel/chapitre"><i class="fas fa-edit"></i> Chapitres</a>
 </nav>
 
 <!-- CONTENU -->

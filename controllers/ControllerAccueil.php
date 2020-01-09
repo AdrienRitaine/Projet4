@@ -1,6 +1,6 @@
 <?php
 
-require_once('views/View.php');
+require_once 'views/View.php';
 
 class ControllerAccueil
 {
@@ -24,7 +24,7 @@ class ControllerAccueil
         $this->_articleManager = new ArticleManager;
         $articles = $this->_articleManager->getArticles();
 
-       $this->_view = new View('Accueil', 0);
+       $this->_view = new View('accueil', 0);
        $this->_view->generate(array('articles' => $articles));
     }
 }

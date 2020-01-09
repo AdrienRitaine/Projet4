@@ -1,6 +1,6 @@
 <?php
 
-require_once('views/View.php');
+require_once 'views/View.php';
 require_once('models/UserManager.php');
 
 class ControllerConnexion
@@ -23,7 +23,7 @@ class ControllerConnexion
         {
             if($url[1] === 'login')
             {
-                if(!empty($_POST['pseudo']) && !empty($_POST['password']))
+                if(isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['password']))
                 {
                     $this->getCon($_POST);
                 }
@@ -126,6 +126,7 @@ class ControllerConnexion
         $_SESSION['password'] = $this->_password;
         $_SESSION['permission'] = $this->_permission;
         $_SESSION['connected'] = "yes";
+        $_SESSION['token'] = rand();
         $this->_errorMsg = '<h2 class="error">Vous étes connecter !</h2>';
         $this->connexion();
        }

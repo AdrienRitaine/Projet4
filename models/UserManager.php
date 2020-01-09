@@ -67,6 +67,18 @@ class UserManager extends Model
         $this->getBdd();
         $this->resetPassword($recovery, $id, $password);
     }
+
+    public function getUsers()
+    {
+        $this->getBdd();
+        return $this->getAll('utilisateurs', 'User');
+    }
+
+    public function deleteUser($id)
+    {
+        $this->getBdd();
+        $this->deleteDataById('utilisateurs', $id);
+    }
 }
 
 ?>

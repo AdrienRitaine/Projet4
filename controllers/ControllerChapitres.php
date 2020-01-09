@@ -1,6 +1,6 @@
 <?php
 
-require_once('views/View.php');
+require_once 'views/View.php';
 
 class ControllerChapitres
 {
@@ -82,7 +82,7 @@ class ControllerChapitres
         $this->_articleManager = new ArticleManager;
         $articles = $this->_articleManager->getArticles();
 
-        $this->_view = new View('Chapitres', 0);
+        $this->_view = new View('chapitres', 0);
         $this->_view->generate(array('articles' => $articles));
     }
 
@@ -99,7 +99,7 @@ class ControllerChapitres
             $this->_date = $value['date_creation'];
         }
         $infos = array('titre' => $this->_titre, 'contenu' => $this->_contenu, 'id' => $id, 'auteur' => $this->_auteur, 'date' => $this->_date, 'error' => $this->_errorMsg);
-        $this->_view = new View('OpenChapitre', 0);
+        $this->_view = new View('openChapitre', 0);
         $this->_view->generate(array('infos' => $infos, 'comments' => $comment));
     }
 

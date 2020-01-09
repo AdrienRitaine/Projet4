@@ -1,6 +1,6 @@
 <?php
 
-require_once('views/View.php');
+require_once 'views/View.php';
 
 class ControllerPanel
 {
@@ -16,7 +16,7 @@ class ControllerPanel
      */
     public function __construct($url)
     {
-        if($url && count($url) > 3)
+        if($url && count($url) > 4)
         {
             throw new Exception('Page introuvable !');
         }
@@ -44,7 +44,7 @@ class ControllerPanel
             }
             else if($url[1] === 'editChapter')
             {
-                if(isset($_POST['titre']) && !empty($_POST['contenu']) && !empty($_POST['id']))
+                if(isset($_POST['titre']) && isset($_POST['contenu']) && isset($_POST['id']) && !empty($_POST['titre']) && !empty($_POST['contenu']) && !empty($_POST['id']))
                 {
                     $this->editChapter($_POST);
                     echo "success";
@@ -56,9 +56,9 @@ class ControllerPanel
             }
             else if($url[1] === 'delete')
             {
-                if(isset($url[2]))
+                if(isset($url[2]) && isset($url[3]) && !empty($url[2]) && !empty($url[3]))
                 {
-                    $this->delete($url['2']);
+                    $this->delete($url[2], $url[3]);
                 }
                 else
                 {
@@ -67,9 +67,20 @@ class ControllerPanel
             }
             else if($url[1] === 'deleteComment')
             {
-                if(isset($url[2]))
+                if(isset($url[2]) && isset($url[3]) && !empty($url[2]) && !empty($url[3]))
                 {
-                    $this->deleteComment($url['2']);
+                    $this->deleteComment($url[2], $url[3]);
+                }
+                else
+                {
+                    throw new Exception('Page introuvable !! ');
+                }
+            }
+            else if($url[1] === 'deleteUser')
+            {
+                if(isset($url[2]) && isset($url[3]) && !empty($url[2]) && !empty($url[3]))
+                {
+                    $this->deleteUser($url[2], $url[3]);
                 }
                 else
                 {
@@ -80,7 +91,7 @@ class ControllerPanel
             {
                 if(isset($url[2]))
                 {
-                    $this->acceptComment($url['2']);
+                    $this->acceptComment($url[2]);
                 }
                 else
                 {
@@ -91,7 +102,7 @@ class ControllerPanel
             {
                 if(isset($url[2]))
                 {
-                    $this->edit($url['2']);
+                    $this->edit($url[2]);
                 }
                 else
                 {
@@ -101,6 +112,10 @@ class ControllerPanel
             else if($url[1] === 'signalement')
             {
                 $this->signal();
+            }
+            else if($url[1] === 'membres')
+            {
+                $this->membres();
             }
             else
             {
@@ -129,6 +144,8 @@ class ControllerPanel
             throw new Exception('Permission non accordée ! ');
         }
     }
+
+
 
     private function new()
     {
@@ -171,21 +188,27 @@ class ControllerPanel
         }
     }
 
-    private function delete($id)
+    private function delete($id, $token)
     {
         if ($_SESSION['permission'] == 1)
         {
-            if ($id)
+            if ($token == $_SESSION['token'])
             {
-                $this->_con = new ArticleManager();
-                $this->_con->deleteChapter(intval($id));
-                $this->panel();
+                if ($id)
+                {
+                    $this->_con = new ArticleManager();
+                    $this->_con->deleteChapter(intval($id));
+                    $this->panel();
+                }
+                else
+                {
+                    throw new Exception('Page introuvable !');
+                }
             }
             else
             {
-                throw new Exception('Page introuvable !');
+                throw new Exception('Token non valide, veuillez-vous reconnectez !');
             }
-
         }
         else
         {
@@ -193,21 +216,24 @@ class ControllerPanel
         }
     }
 
-    private function deleteComment($id)
+    private function deleteComment($id, $token)
     {
         if ($_SESSION['permission'] == 1)
         {
-            if ($id)
+            if ($token == $_SESSION['token'])
             {
-                $this->_con = new ArticleManager();
-                $this->_con->deleteComments(intval($id));
-                $this->signal();
+                if ($id) {
+                    $this->_con = new ArticleManager();
+                    $this->_con->deleteComments(intval($id));
+                    $this->signal();
+                } else {
+                    throw new Exception('Page introuvable !');
+                }
             }
             else
             {
-                throw new Exception('Page introuvable !');
+                throw new Exception('Token non valide, veuillez-vous reconnectez !');
             }
-
         }
         else
         {
@@ -297,6 +323,48 @@ class ControllerPanel
 
             $this->_view = new View('Signalement', 1);
             $this->_view->generate(array('infos' => $infos));
+        }
+        else
+        {
+            throw new Exception('Permission non accordée ! ');
+        }
+    }
+
+    private function membres()
+    {
+        if ($_SESSION['permission'] == 1)
+        {
+            $this->_con = new UserManager();
+            $this->_infos = array('membres' => $this->_con->getUsers(), 'erreur' => $this->_errorMsg);
+            $infos = $this->_infos;
+
+            $this->_view = new View('Membres', 1);
+            $this->_view->generate(array('infos' => $infos));
+        }
+        else
+        {
+            throw new Exception('Permission non accordée ! ');
+        }
+    }
+
+    private function deleteUser($id, $token)
+    {
+        if ($_SESSION['permission'] == 1)
+        {
+            if ($token == $_SESSION['token'])
+            {
+                if ($id) {
+                    $this->_con = new UserManager();
+                    $this->_con->deleteUser(intval($id));
+                    $this->membres();
+                } else {
+                    throw new Exception('Page introuvable !');
+                }
+            }
+            else
+            {
+                throw new Exception('Token non valide, veuillez-vous reconnectez !');
+            }
         }
         else
         {

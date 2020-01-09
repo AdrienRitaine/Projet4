@@ -14,16 +14,22 @@ require('config.php');
             <th>COMMENTAIRE</th>
             <th>ACTION</th>
         </tr>
-        <?php foreach($infos['comments'] as $comment): ?>
+        <?php if(count($infos['comments'])){ ?>
+            <?php foreach($infos['comments'] as $comment): ?>
+                <tr>
+                    <td><?= $comment->pseudo() ?></td>
+                    <td><?= $comment->commentaire() ?></td>
+                    <td class="action">
+                        <a href="<?= $url ?>Panel/deleteComment/<?= $comment->id() ?>/<?= $_SESSION['token'] ?>"><i class="fas fa-trash-alt"></i></a>
+                        <a href="<?= $url ?>Panel/acceptComment/<?= $comment->id() ?>"><i class="fas fa-check"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+        <?php } else { ?>
             <tr>
-                <td><?= $comment->pseudo() ?></td>
-                <td><?= $comment->commentaire() ?></td>
-                <td class="action">
-                    <a href="<?= $url ?>Panel/deleteComment/<?= $comment->id() ?>"><i class="fas fa-trash-alt"></i></a>
-                    <a href="<?= $url ?>Panel/acceptComment/<?= $comment->id() ?>"><i class="fas fa-check"></i></a>
-                </td>
+                <td colspan="3">Aucun signalement</td>
             </tr>
-        <?php endforeach ?>
+        <?php } ?>
 
     </table>
 </section>
