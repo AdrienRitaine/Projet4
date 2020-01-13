@@ -1,11 +1,11 @@
 <?php
-    $this->_t = "Connexion / Inscription";
-    $this->_style = "Connexion";
-    require('config.php');
+$this->_t = "Connexion / Inscription";
+$this->_style = "Connexion";
+require('config.php');
 ?>
 
     <!-- LOGFORM -->
-    <div class="logForm">
+    <div class="logForm" id="logForm">
         <div class="chooseForm">
             <a id="connexion">CONNEXION</a>
             <a id="inscrire">S'INSCRIRE</a>
@@ -17,7 +17,7 @@
                 <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
                 <input class="password inputText" type="password" name="password">
                 <div class="inputCheckbox">
-                    <input class="save" type="checkbox" name="save">
+                    <input class="save" id="save" type="checkbox" name="save">
                     <label for="save">Se souvenir de moi ?</label>
                 </div>
                 <input class="submit" type="submit" name="submit" value="SE CONNECTER">
@@ -33,8 +33,14 @@
                 <input class="pseudo inputText" type="email" name="email">
                 <label for="password"><i class="fas fa-lock"></i> Mot de passe</label>
                 <input class="password inputText" type="password" name="password">
+                <label for="passwordConfirm"><i class="fas fa-lock"></i> Confirmer le mot de passe</label>
+                <input class="password inputText" type="password" name="passwordConfirm">
+                <div class="inputCheckbox">
+                    <input class="save" id="acceptCGU" type="checkbox" name="save">
+                    <label for="acceptCGU">J'accepte les CGU.</label>
+                </div>
                 <input class="submit" type="submit" name="submit" value="S'INSCRIRE">
             </form>
         </div>
     </div>
-    <?=  $errorMsg ?>
+<?= $errorMsg ?>

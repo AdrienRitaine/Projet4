@@ -47,7 +47,7 @@ class ArticleManager extends Model
     public function deleteChapter($id)
     {
         $this->getBdd();
-        $this->deleteDataById('articles', $id);
+        $this->deleteDataByInfo('articles', 'id', $id);
     }
 
     public function updateChapitre($data, $id)
@@ -56,10 +56,10 @@ class ArticleManager extends Model
         $this->updateChapitreById($data, $id);
     }
 
-    public function deleteComments($id)
+    public function deleteComments($data, $info)
     {
         $this->getBdd();
-        $this->deleteDataById('commentaires', $id);
+        $this->deleteDataByInfo('commentaires', $data, $info);
     }
 }
 

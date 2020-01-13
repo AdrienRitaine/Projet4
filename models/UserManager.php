@@ -7,7 +7,7 @@ class UserManager extends Model
     public function verifyUser($pseudo, $password)
     {
         $data = array(
-            'pseudo' => $pseudo, 
+            'pseudo' => $pseudo,
             'password' => $password
         );
 
@@ -30,7 +30,7 @@ class UserManager extends Model
     // Retourne l'information demander
     public function getRecovery($email)
     {
-          $this->getBdd();
+        $this->getBdd();
         return $this->getRecoveryId($email);
     }
 
@@ -42,7 +42,8 @@ class UserManager extends Model
             'email' => $email,
             'motdepasse' => $password,
             'permission' => 0,
-            'recovery' => rand()
+            'recovery' => rand(),
+            'status' => 0
         );
 
         $this->getBdd();
@@ -53,7 +54,7 @@ class UserManager extends Model
     public function verifyInfo($info, $data)
     {
         $this->getBdd();
-        return $this->verifyInfomation($info, $data);
+        return $this->verifyInfomation('utilisateurs', $info, $data);
     }
 
     public function recovery_exist($recovery, $id)
@@ -77,7 +78,18 @@ class UserManager extends Model
     public function deleteUser($id)
     {
         $this->getBdd();
-        $this->deleteDataById('utilisateurs', $id);
+        $this->deleteDataByInfo('utilisateurs', 'id', $id);
+    }
+
+    public function blockUsers($id)
+    {
+        $this->getBdd();
+        if ($this->verifyInfomationById('utilisateurs', 'status', 0, $id)) {
+            $this->updateDataById('utilisateurs', $id, 'status', 1);
+        } else {
+            $this->updateDataById('utilisateurs', $id, 'status', 0);
+        }
+
     }
 }
 

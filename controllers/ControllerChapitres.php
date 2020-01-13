@@ -11,68 +11,42 @@ class ControllerChapitres
     private $_auteur;
     private $_date;
     private $_errorMsg;
-    private $_comment;
-    private $_id;
     private $_con;
 
     public function __construct($url)
     {
-        if($url && count($url) > 3)
-        {
+        if ($url && count($url) > 3) {
             throw new Exception('Page introuvable !');
-        }
-        else if(isset($url) && isset($url[1]))
-        {
-            if($url[1] === 'v')
-            {
-                if (isset($url['2']) && !empty($url['2']))
-                {
+        } else if (isset($url) && isset($url[1])) {
+            if ($url[1] === 'v') {
+                if (isset($url['2']) && !empty($url['2'])) {
                     $this->_errorMsg = "";
                     $this->open($url['2']);
-                }
-                else
-                {
+                } else {
                     throw new Exception('Chapitre non trouvé !');
                 }
-            }
-            else if($url[1] === 'comment')
-            {
-                if (isset($url['2']) && !empty($url['2']))
-                {
-                    if (!empty($_POST['comment']))
-                    {
+            } else if ($url[1] === 'comment') {
+                if (isset($url['2']) && !empty($url['2'])) {
+                    if (!empty($_POST['comment'])) {
                         $this->comment($url['2'], $_POST);
-                    }
-                    else
-                    {
+                    } else {
                         $this->_errorMsg = 'Veuillez remplir tout les champs';
                         $this->open($url['2']);
                     }
-                }
-                else
-                {
+                } else {
                     throw new Exception('Chapitre non trouvé !');
                 }
-            }
-            else if($url[1] === 'signaler')
-            {
-                if (isset($url['2']) && !empty($url['2']))
-                {
+            } else if ($url[1] === 'signaler') {
+                if (isset($url['2']) && !empty($url['2'])) {
                     echo "success";
                     $this->signaler($url['2']);
-                }
-                else
-                {
+                } else {
                     throw new Exception('Commentaires non trouvé !');
                 }
-            }
-            else
-            {
+            } else {
                 throw new Exception('Page introuvable !! ');
             }
-        }
-        else
-        {
+        } else {
             $this->chapitres();
         }
     }
@@ -91,8 +65,7 @@ class ControllerChapitres
         $this->_con = new ArticleManager();
         $chapitre = $this->_con->getChapitre($id);
         $comment = $this->_con->getComments($id);
-        foreach($chapitre as $value)
-        {
+        foreach ($chapitre as $value) {
             $this->_titre = $value['titre'];
             $this->_contenu = $value['contenu'];
             $this->_auteur = $value['auteur'];
@@ -105,41 +78,36 @@ class ControllerChapitres
 
     private function comment($id, $array)
     {
-        if($_SESSION['connected'] === 'yes')
-        {
-            $this->_con = new ArticleManager();
+        if ($_SESSION['connected'] === 'yes') {
 
+            $this->_con = new UserManager();
             $data = array(
                 'pseudo' => $_SESSION['pseudo'],
                 'commentaire' => htmlspecialchars(addslashes($array['comment'])),
                 'date' => date("Y-m-d  H:i:s"),
-                'signalement' =>  0,
-                'id_article' => $id
+                'signalement' => 0,
+                'id_article' => $id,
+                'id_pseudo' => $this->_con->getInfoUser($_SESSION['pseudo'], $_SESSION['password'], 'id')
             );
-
+            $this->_con = new ArticleManager();
             $this->_con->addComment($data);
-            $this->_errorMsg = '<script>  Swal.fire(
-                            \'Succés !\',
-                            \'Commentaire envoyé.\',
-                            \'success\'
-                        )</script>';
+            $this->_errorMsg = "<script>  Swal.fire(
+                            'Succés !',
+                            'Commentaire envoyé.',
+                            'success'
+                        )</script>";
             $this->open($id);
-        }
-        else
-        {
+        } else {
             throw new Exception('Connectez-vous !');
         }
     }
 
     private function signaler($id)
     {
-        if($_SESSION['connected'] === 'yes')
-        {
+        if ($_SESSION['connected'] === 'yes') {
             $this->_con = new ArticleManager();
-            $this->_con->signalerComment(intval($id),  1);
-        }
-        else
-        {
+            $this->_con->signalerComment(intval($id), 1);
+        } else {
             throw new Exception('Connectez-vous !');
         }
     }

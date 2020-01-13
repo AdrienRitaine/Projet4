@@ -1,5 +1,6 @@
 <?php
 
+
 abstract class Model
 {
     private static $_bdd;
@@ -7,15 +8,15 @@ abstract class Model
     // Instancie la connexion a la bdd
     private static function setBdd()
     {
-        self::$_bdd = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '');
+        require('config.php');
+        self::$_bdd = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['database'] . ";charset=utf8", $db['username'], $db['password']);
         self::$_bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-    } 
+    }
 
     // Récupére la connexion a la bdd
     protected function getBdd()
     {
-        if(self::$_bdd == null)
-        {
+        if (self::$_bdd == null) {
             self::setBdd();
             return self::$_bdd;
         }
@@ -24,11 +25,10 @@ abstract class Model
     protected function getAll($table, $obj)
     {
         $var = [];
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' ORDER BY id desc');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' ORDER BY id desc');
         $req->execute();
-        while($data = $req->fetch(PDO::FETCH_ASSOC))
-        {
-            $var[]= new $obj($data);
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $var[] = new $obj($data);
         }
         return $var;
         $req->closeCursor();
@@ -37,11 +37,10 @@ abstract class Model
     protected function getCommentsById($table, $obj, $id)
     {
         $var = [];
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE id_article='.$id);
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE id_article=' . $id);
         $req->execute();
-        while($data = $req->fetch(PDO::FETCH_ASSOC))
-        {
-            $var[]= new $obj($data);
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $var[] = new $obj($data);
         }
         return $var;
         $req->closeCursor();
@@ -50,11 +49,10 @@ abstract class Model
     protected function getCommentsBySignals($table, $obj)
     {
         $var = [];
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE signalement=1');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE signalement=1');
         $req->execute();
-        while($data = $req->fetch(PDO::FETCH_ASSOC))
-        {
-            $var[]= new $obj($data);
+        while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
+            $var[] = new $obj($data);
         }
         return $var;
         $req->closeCursor();
@@ -62,7 +60,7 @@ abstract class Model
 
     protected function getRowById($table, $id)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE id=' . $id);
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE id=' . $id);
         $req->execute();
         return $req;
         $req->closeCursor();
@@ -71,14 +69,11 @@ abstract class Model
     // Renvoi un bool si l'utilisateur existe ou non
     protected function getWhereUser($table, $array)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE pseudo=\'' . $array['pseudo'] . '\' AND motdepasse=\'' . $array['password'] . '\'');
         $req->execute();
-        if($req->rowCount() > 0)
-        {
+        if ($req->rowCount() > 0) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
         $req->closeCursor();
@@ -87,9 +82,9 @@ abstract class Model
     //Retourne une information de l'utilisateur
     protected function getWhereUserInfo($table, $array, $info)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table. ' WHERE pseudo=\''.$array['pseudo'].'\' AND motdepasse=\''.$array['password'].'\'');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE pseudo=\'' . $array['pseudo'] . '\' AND motdepasse=\'' . $array['password'] . '\'');
         $req->execute();
-        foreach($req as $donnees){
+        foreach ($req as $donnees) {
             return $donnees[$info];
         }
         $req->closeCursor();
@@ -98,8 +93,7 @@ abstract class Model
     // Ajout de donnée dans la bdd
     protected function addData($table, $array)
     {
-        foreach($array as $key => $value)
-        {
+        foreach ($array as $key => $value) {
             $k[] = $key;
             $v[] = "'" . $value . "'";
         }
@@ -112,16 +106,25 @@ abstract class Model
     }
 
     // Vérifie une information dans le base de donnée
-    protected function verifyInfomation($info, $data)
+    protected function verifyInfomation($table, $info, $data)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM utilisateurs WHERE '.$info.'=\''.$data.'\'');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE ' . $info . '=\'' . $data . '\'');
         $req->execute();
-        if($req->rowCount() > 0)
-        {
+        if ($req->rowCount() > 0) {
             return true;
+        } else {
+            return false;
         }
-        else
-        {
+        $req->closeCursor();
+    }
+
+    protected function verifyInfomationById($table, $info, $data, $id)
+    {
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE id=' . $id . ' AND ' . $info . '=' . $data);
+        $req->execute();
+        if ($req->rowCount() > 0) {
+            return true;
+        } else {
             return false;
         }
         $req->closeCursor();
@@ -129,7 +132,7 @@ abstract class Model
 
     protected function getRecoveryId($email)
     {
-        $req = self::$_bdd->prepare("SELECT * FROM utilisateurs WHERE email='".$email."'");
+        $req = self::$_bdd->prepare("SELECT * FROM utilisateurs WHERE email='" . $email . "'");
         $req->execute();
         return $req;
         $req->closeCursor();
@@ -137,14 +140,11 @@ abstract class Model
 
     protected function verifyRecovery($recovery, $id)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM utilisateurs WHERE id=\''.$id.'\' AND recovery=\''.$recovery.'\'');
+        $req = self::$_bdd->prepare('SELECT * FROM utilisateurs WHERE id=\'' . $id . '\' AND recovery=\'' . $recovery . '\'');
         $req->execute();
-        if($req->rowCount() > 0)
-        {
+        if ($req->rowCount() > 0) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
         $req->closeCursor();
@@ -153,7 +153,7 @@ abstract class Model
     protected function resetPassword($recovery, $id, $password)
     {
         $newrecovery = rand();
-        $req = self::$_bdd->prepare('UPDATE utilisateurs SET motdepasse=\'' . $password . '\' ,recovery=\'' . $newrecovery. '\'' .'WHERE id=\''. $id .'\' AND recovery=\'' . $recovery . '\'');
+        $req = self::$_bdd->prepare('UPDATE utilisateurs SET motdepasse=\'' . $password . '\' ,recovery=\'' . $newrecovery . '\'' . 'WHERE id=\'' . $id . '\' AND recovery=\'' . $recovery . '\'');
         $req->execute();
         $req->closeCursor();
     }
@@ -165,16 +165,30 @@ abstract class Model
         $req->closeCursor();
     }
 
+    protected function deleteDataByInfo($table, $data, $info)
+    {
+        $req = self::$_bdd->prepare('DELETE FROM ' . $table . ' WHERE ' . $data . '=' . $info);
+        $req->execute();
+        $req->closeCursor();
+    }
+
     protected function updateChapitreById($data, $id)
     {
-        $req = self::$_bdd->prepare('UPDATE articles SET titre=\'' . $data['titre'] . '\' ,contenu=\'' . $data['contenu']. '\'' .'WHERE id='. $id);
+        $req = self::$_bdd->prepare('UPDATE articles SET titre=\'' . $data['titre'] . '\' ,contenu=\'' . $data['contenu'] . '\'' . 'WHERE id=' . $id);
         $req->execute();
         $req->closeCursor();
     }
 
     protected function signalerCommentById($id, $signal)
     {
-        $req = self::$_bdd->prepare('UPDATE commentaires SET signalement=' . $signal . ' WHERE id='. $id);
+        $req = self::$_bdd->prepare('UPDATE commentaires SET signalement=' . $signal . ' WHERE id=' . $id);
+        $req->execute();
+        $req->closeCursor();
+    }
+
+    protected function updateDataById($table, $id, $column, $columnData)
+    {
+        $req = self::$_bdd->prepare('UPDATE ' . $table . ' SET ' . $column . '=' . $columnData . ' WHERE id=' . $id);
         $req->execute();
         $req->closeCursor();
     }

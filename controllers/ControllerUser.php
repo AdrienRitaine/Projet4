@@ -7,6 +7,7 @@ class ControllerUser
     private $_view;
     private $_con;
     private $_password;
+    private $_passwordConfirm;
     private $_errorMsg;
     private $_infos;
     private $_recovery;
@@ -14,49 +15,30 @@ class ControllerUser
 
     public function __construct($url)
     {
-        if(isset($url) && count($url) > 4 || isset($url) && count($url) < 4)
-        {
+        if (isset($url) && count($url) > 4 || isset($url) && count($url) < 4) {
             throw new Exception('Page introuvable !');
-        }
-        else if(isset($url) && isset($url[1]))
-        {
-            if($url[1] === 'resetPassword')
-            {
-                if(!empty($url[2]) && !empty($url[3]))
-                {
+        } else if (isset($url) && isset($url[1])) {
+            if ($url[1] === 'resetPassword') {
+                if (!empty($url[2]) && !empty($url[3])) {
                     $this->resetPassword($url[2], $url[3]);
-                }
-                else
-                {
+                } else {
                     throw new Exception('Page introuvable !');
                 }
-            }
-            else if($url[1] === 'reset')
-            {
-                if(!empty($url[2]) && !empty($url[3]))
-                {
-                    if (!empty($_POST['password']))
-                    {
+            } else if ($url[1] === 'reset') {
+                if (!empty($url[2]) && !empty($url[3])) {
+                    if (!empty($_POST['password'])) {
                         $this->reset($url[2], $url[3], $_POST);
-                    }
-                    else
-                    {
+                    } else {
                         $this->_errorMsg = "<h2 class=\"error\">Veuillez remplir tout les champs !</h2>";
                         $this->resetPassword($url[2], $url[3]);
                     }
-                }
-                else
-                {
+                } else {
                     throw new Exception('Page introuvable !');
                 }
-            }
-            else
-            {
+            } else {
                 throw new Exception('Page introuvable !');
             }
-        }
-        else
-        {
+        } else {
             throw new Exception('Page introuvable !');
         }
     }
@@ -68,12 +50,9 @@ class ControllerUser
         $this->_infos = array('recovery' => $this->_recovery, 'id' => $this->_id, 'error' => $this->_errorMsg);
 
         $this->_con = new UserManager();
-        if($this->_con->recovery_exist( $this->_recovery, $this->_id))
-        {
+        if ($this->_con->recovery_exist($this->_recovery, $this->_id)) {
             $this->resetForm();
-        }
-        else
-        {
+        } else {
             throw new Exception('Lien invalide ou expiré !');
         }
     }
@@ -90,19 +69,21 @@ class ControllerUser
         $this->_recovery = $recovery;
         $this->_id = $id;
         $this->_password = sha1($array['password']);
+        $this->_passwordConfirm = sha1($array['passwordConfirm']);
 
-        $this->_con = new UserManager();
-        if($this->_con->recovery_exist($this->_recovery, $this->_id))
-        {
-            $this->_con->updatePassword($this->_recovery, $this->_id, $this->_password);
-            $errorMsg = '<script> Toast.fire({icon: \'success\',  title: \'Mot de passe changé !\'}) </script>';
-            $this->_view = new View('Connexion', 0);
-            $this->_view->generate(array('errorMsg' => $errorMsg));
+        if ($this->_password === $this->_passwordConfirm) {
+            $this->_con = new UserManager();
+            if ($this->_con->recovery_exist($this->_recovery, $this->_id)) {
+                $this->_con->updatePassword($this->_recovery, $this->_id, $this->_password);
+                $errorMsg = '<script> Toast.fire({icon: \'success\',  title: \'Mot de passe changé !\'}) </script>';
+                $this->_view = new View('Connexion', 0);
+                $this->_view->generate(array('errorMsg' => $errorMsg));
+            } else {
+                throw new Exception('Lien invalide ou expiré !');
+            }
+        } else {
+            $this->_errorMsg = "<h2 class=\"error\">Les mots de passe ne sont pas identiques !</h2>";
+            $this->resetPassword($recovery, $id);
         }
-        else
-        {
-            throw new Exception('Lien invalide ou expiré !');
-        }
-
     }
 }
