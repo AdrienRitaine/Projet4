@@ -12,31 +12,32 @@ require('config.php');
 
     <table>
         <thead>
-            <tr>
-                <th>AUTEUR</th>
-                <th>TITRE</th>
-                <th>DATE</th>
-                <th>ACTION</th>
-            </tr>
+        <tr>
+            <th>AUTEUR</th>
+            <th>TITRE</th>
+            <th>DATE</th>
+            <th>ACTION</th>
+        </tr>
         </thead>
         <tbody>
-            <?php if(count($infos['article'])){ ?>
-                <?php foreach($infos['article'] as $article): ?>
+        <?php if (count($infos['chapitres'])) { ?>
+            <?php foreach ($infos['chapitres'] as $chapitre): ?>
                 <tr>
-                    <td data-title="Auteur"><?= $article->auteur() ?></td>
-                    <td data-title="Titre"><?= $article->titre() ?></td>
-                    <td data-title="Date"><?= $article->date_creation() ?></td>
+                    <td data-title="Auteur"><?= $chapitre->auteur() ?></td>
+                    <td data-title="Titre"><?= $chapitre->titre() ?></td>
+                    <td data-title="Date"><?= $chapitre->date_creation() ?></td>
                     <td class="action" data-title="Action">
-                        <a href="<?= $url ?>Panel/delete/<?= $article->id() ?>/<?= $_SESSION['token'] ?>"><i class="fas fa-trash-alt"></i></a>
-                        <a href="<?= $url ?>Panel/edit/<?= $article->id() ?>"><i class="fas fa-edit"></i></a>
+                        <a href="<?= $url ?>Panel/delete/<?= $chapitre->id() ?>/<?= $_SESSION['token'] ?>"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        <a href="<?= $url ?>Panel/edit/<?= $chapitre->id() ?>"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
-                <?php endforeach ?>
-            <?php } else { ?>
+            <?php endforeach ?>
+        <?php } else { ?>
             <tr>
                 <td colspan="4">Aucun chapitre</td>
             </tr>
-            <?php } ?>
+        <?php } ?>
         </tbody>
     </table>
 </section>

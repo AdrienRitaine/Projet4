@@ -25,7 +25,7 @@ abstract class Model
     protected function getAll($table, $obj)
     {
         $var = [];
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' ORDER BY id desc');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' ORDER BY id DESC');
         $req->execute();
         while ($data = $req->fetch(PDO::FETCH_ASSOC)) {
             $var[] = new $obj($data);
@@ -60,7 +60,8 @@ abstract class Model
 
     protected function getRowById($table, $id)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE id=' . $id);
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE id = :id');
+        $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->execute();
         return $req;
         $req->closeCursor();
@@ -69,7 +70,9 @@ abstract class Model
     // Renvoi un bool si l'utilisateur existe ou non
     protected function getWhereUser($table, $array)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE pseudo=\'' . $array['pseudo'] . '\' AND motdepasse=\'' . $array['password'] . '\'');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE pseudo = :pseudo AND motdepasse = :password');
+        $req->bindValue('pseudo', $array['pseudo'], PDO::PARAM_STR);
+        $req->bindValue('password', $array['password'], PDO::PARAM_STR);
         $req->execute();
         if ($req->rowCount() > 0) {
             return true;
@@ -82,7 +85,9 @@ abstract class Model
     //Retourne une information de l'utilisateur
     protected function getWhereUserInfo($table, $array, $info)
     {
-        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE pseudo=\'' . $array['pseudo'] . '\' AND motdepasse=\'' . $array['password'] . '\'');
+        $req = self::$_bdd->prepare('SELECT * FROM ' . $table . ' WHERE pseudo = :pseudo AND motdepasse = :password');
+        $req->bindValue('pseudo', $array['pseudo'], PDO::PARAM_STR);
+        $req->bindValue('password', $array['password'], PDO::PARAM_STR);
         $req->execute();
         foreach ($req as $donnees) {
             return $donnees[$info];
@@ -102,6 +107,7 @@ abstract class Model
         $v = implode(",", $v);
 
         $req = self::$_bdd->prepare("INSERT INTO " . $table . " (" . $k . ") VALUES (" . $v . ")");
+
         $req->execute();
     }
 
@@ -158,17 +164,21 @@ abstract class Model
         $req->closeCursor();
     }
 
-    protected function deleteDataById($table, $id)
-    {
-        $req = self::$_bdd->prepare('DELETE FROM ' . $table . ' WHERE id=' . $id);
-        $req->execute();
-        $req->closeCursor();
-    }
-
     protected function deleteDataByInfo($table, $data, $info)
     {
         $req = self::$_bdd->prepare('DELETE FROM ' . $table . ' WHERE ' . $data . '=' . $info);
         $req->execute();
+        $req->closeCursor();
+    }
+
+    protected function getDataByInfo($table, $getData, $data, $info)
+    {
+        $req = self::$_bdd->prepare('SELECT ' . $getData . ' FROM ' . $table . ' WHERE ' . $data . '=\'' . $info . '\'');
+        $req->execute();
+        foreach ($req as $reqs) {
+            return $reqs['avatar'];
+        }
+
         $req->closeCursor();
     }
 
@@ -188,7 +198,7 @@ abstract class Model
 
     protected function updateDataById($table, $id, $column, $columnData)
     {
-        $req = self::$_bdd->prepare('UPDATE ' . $table . ' SET ' . $column . '=' . $columnData . ' WHERE id=' . $id);
+        $req = self::$_bdd->prepare('UPDATE ' . $table . ' SET ' . $column . '=\'' . $columnData . '\' WHERE id=' . $id);
         $req->execute();
         $req->closeCursor();
     }

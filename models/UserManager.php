@@ -38,12 +38,13 @@ class UserManager extends Model
     public function userRegister($pseudo, $email, $password)
     {
         $data = array(
-            'pseudo' => $pseudo,
-            'email' => $email,
+            'pseudo' => addslashes($pseudo),
+            'email' => addslashes($email),
             'motdepasse' => $password,
             'permission' => 0,
             'recovery' => rand(),
-            'status' => 0
+            'status' => 0,
+            'avatar' => 'default.png'
         );
 
         $this->getBdd();
@@ -90,6 +91,12 @@ class UserManager extends Model
             $this->updateDataById('utilisateurs', $id, 'status', 0);
         }
 
+    }
+
+    public function updateAvatar($avatar, $id)
+    {
+        $this->getBdd();
+        $this->updateDataById('utilisateurs', $id, 'avatar', $avatar);
     }
 }
 

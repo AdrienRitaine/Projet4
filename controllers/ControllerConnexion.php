@@ -57,11 +57,11 @@ class ControllerConnexion
     private function connexion()
     {
         $this->_con = new UserManager();
-        if ($this->_con->verifyUser($_SESSION['pseudo'], $_SESSION['password'])) {
-            $articleManager = new ArticleManager;
-            $articles = $articleManager->getArticles();
+        if ($this->_con->verifyUser(addslashes($_SESSION['pseudo']), $_SESSION['password'])) {
+            $articleManager = new ChapitreManager;
+            $chapitres = $articleManager->getChapitres();
             $this->_view = new View('Accueil', 0);
-            $this->_view->generate(array('articles' => $articles));
+            $this->_view->generate(array('chapitres' => $chapitres));
         } else {
             $errorMsg = $this->_errorMsg;
             $this->_view = new View('Connexion', 0);
@@ -96,6 +96,7 @@ class ControllerConnexion
                 $this->_permission = $this->_con->getInfoUser($this->_pseudo, $this->_password, 'permission'); // Récupération de la permission
                 $_SESSION['pseudo'] = $this->_pseudo;
                 $_SESSION['password'] = $this->_password;
+                $_SESSION['userId'] = $this->_con->getInfoUser($this->_pseudo, $this->_password, 'id');
                 $_SESSION['permission'] = $this->_permission;
                 $_SESSION['connected'] = "yes";
                 $_SESSION['token'] = rand();
@@ -121,23 +122,28 @@ class ControllerConnexion
         $this->_password = sha1(htmlspecialchars($array['password']));
         $this->_passwordConfirm = sha1(htmlspecialchars($array['passwordConfirm']));
 
-        if ($this->_password === $this->_passwordConfirm) {
-            $this->_con = new UserManager();
-            if ($this->_con->verifyInfo('pseudo', $this->_pseudo)) {
-                $this->_errorMsg = "<h2 class=\"error\">Pseudo non disponible.</h2>";
-                $this->connexion();
-            } else {
-                if ($this->_con->verifyInfo('email', $this->_email)) {
-                    $this->_errorMsg = "<h2 class=\"error\">L'e-mail choisi existe déjà.</h2>";
+        if (preg_match('`^([a-zA-Z0-9-_]{2,36})$`', $this->_pseudo)) {
+            if ($this->_password === $this->_passwordConfirm) {
+                $this->_con = new UserManager();
+                if ($this->_con->verifyInfo('pseudo', $this->_pseudo)) {
+                    $this->_errorMsg = "<h2 class=\"error\">Pseudo non disponible.</h2>";
                     $this->connexion();
                 } else {
-                    $this->_con->userRegister($this->_pseudo, $this->_email, $this->_password);
-                    $this->_errorMsg = "<script> Toast.fire({icon: 'success',  title: 'Inscription réussi !'}) </script>";
-                    $this->connexion();
+                    if ($this->_con->verifyInfo('email', $this->_email)) {
+                        $this->_errorMsg = "<h2 class=\"error\">L'e-mail choisi existe déjà.</h2>";
+                        $this->connexion();
+                    } else {
+                        $this->_con->userRegister($this->_pseudo, $this->_email, $this->_password);
+                        $this->_errorMsg = "<script> Toast.fire({icon: 'success',  title: 'Inscription réussi !'}) </script>";
+                        $this->connexion();
+                    }
                 }
+            } else {
+                $this->_errorMsg = "<h2 class=\"error\">Les mots de passe ne sont pas identiques.</h2>";
+                $this->connexion();
             }
         } else {
-            $this->_errorMsg = "<h2 class=\"error\">Les mots de passe ne sont pas identiques.</h2>";
+            $this->_errorMsg = "<h2 class=\"error\">Le pseudo ne doit pas contenir de caractéres spéciaux.</h2>";
             $this->connexion();
         }
     }

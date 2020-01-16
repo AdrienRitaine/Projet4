@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Calistoga&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+
+body {
+    background: url('../img/back.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 100px 0;
+}
+
+/* SECTION */
+
+.section {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 25px 0 25px 0;
+    width: 700px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 200px;
+    text-align: center;
+    color: white;
+}
+
+.sectionExtrait {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#back {
+    position: absolute;
+    background-color: #354b61;
+    top: 100px;
+    height: 80%;
+    width: 450px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.avatarDiv {
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    border-radius: 75px;
+    overflow: hidden;
+}
+
+.avatar {
+    height: 150px;
+    position: relative;
+    background-color: black;
+}
+
+.avatarDiv:hover .avatar {
+    opacity: 0.5;
+}
+
+.avatarDiv:hover .avatarLink {
+    display: block;
+}
+
+.avatarLink {
+    position: relative;
+    top: -100px;
+    margin-bottom: -35px;
+    display: none;
+    pointer-events: none;
+}
+
+.pseudo {
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    font-weight: 900;
+    z-index: 3;
+}
+
+.email {
+    margin-bottom: 30px;
+    z-index: 3;
+}
+
+#avatar {
+    display: none;
+}
+
+.editPassword {
+    color: white;
+    text-decoration: none;
+    background-color: #3498db;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+#changePwd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+    margin-bottom: 40px;
+    z-index: 3;
+}
+
+#changePwd label {
+    margin-top: 10px;
+}
+
+#changePwd input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+}
+
+#changePwd button {
+    width: 100%;
+    padding: 5px;
+    font-size: 1em;
+    position: relative;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+#changePwd button:hover {
+    cursor: pointer;
+    background-color: #318ecd;
+}
+
+.delete {
+    color: #e74c3c;
+    margin: 0px 0 30px;
+    z-index: 3;
+}
+
+@media screen and (max-width: 710px) {
+    .section {
+        margin-top: -100px;
+    }
+}

@@ -10,12 +10,13 @@ class ControllerChapitres
     private $_contenu;
     private $_auteur;
     private $_date;
+    private $_avatar;
     private $_errorMsg;
     private $_con;
 
     public function __construct($url)
     {
-        if ($url && count($url) > 3) {
+        if ($url && count($url) > 4) {
             throw new Exception('Page introuvable !');
         } else if (isset($url) && isset($url[1])) {
             if ($url[1] === 'v') {
@@ -28,7 +29,7 @@ class ControllerChapitres
             } else if ($url[1] === 'comment') {
                 if (isset($url['2']) && !empty($url['2'])) {
                     if (!empty($_POST['comment'])) {
-                        $this->comment($url['2'], $_POST);
+                        $this->comment($url['2'], $_POST, $url[3]);
                     } else {
                         $this->_errorMsg = 'Veuillez remplir tout les champs';
                         $this->open($url['2']);
@@ -53,16 +54,15 @@ class ControllerChapitres
 
     private function chapitres()
     {
-        $this->_articleManager = new ArticleManager;
-        $articles = $this->_articleManager->getArticles();
+        $this->_articleManager = new ChapitreManager;
 
         $this->_view = new View('chapitres', 0);
-        $this->_view->generate(array('articles' => $articles));
+        $this->_view->generate(array('chapitres' => $this->_articleManager->getChapitres()));
     }
 
     private function open($id)
     {
-        $this->_con = new ArticleManager();
+        $this->_con = new ChapitreManager();
         $chapitre = $this->_con->getChapitre($id);
         $comment = $this->_con->getComments($id);
         foreach ($chapitre as $value) {
@@ -76,27 +76,30 @@ class ControllerChapitres
         $this->_view->generate(array('infos' => $infos, 'comments' => $comment));
     }
 
-    private function comment($id, $array)
+    private function comment($id, $array, $token)
     {
         if ($_SESSION['connected'] === 'yes') {
-
-            $this->_con = new UserManager();
-            $data = array(
-                'pseudo' => $_SESSION['pseudo'],
-                'commentaire' => htmlspecialchars(addslashes($array['comment'])),
-                'date' => date("Y-m-d  H:i:s"),
-                'signalement' => 0,
-                'id_article' => $id,
-                'id_pseudo' => $this->_con->getInfoUser($_SESSION['pseudo'], $_SESSION['password'], 'id')
-            );
-            $this->_con = new ArticleManager();
-            $this->_con->addComment($data);
-            $this->_errorMsg = "<script>  Swal.fire(
+            if ($token == $_SESSION['token']) {
+                $this->_con = new UserManager();
+                $data = array(
+                    'pseudo' => $_SESSION['pseudo'],
+                    'commentaire' => htmlspecialchars(addslashes($array['comment'])),
+                    'date' => date("Y-m-d  H:i:s"),
+                    'signalement' => 0,
+                    'id_article' => $id,
+                    'id_pseudo' => $this->_con->getInfoUser($_SESSION['pseudo'], $_SESSION['password'], 'id'),
+                );
+                $this->_con = new ChapitreManager();
+                $this->_con->addComment($data);
+                $this->_errorMsg = "<script>  Swal.fire(
                             'Succés !',
                             'Commentaire envoyé.',
                             'success'
                         )</script>";
-            $this->open($id);
+                $this->open($id);
+            } else {
+                throw new Exception('Une erreur est survenue, veuillez-vous reconnecté !');
+            }
         } else {
             throw new Exception('Connectez-vous !');
         }
@@ -105,7 +108,7 @@ class ControllerChapitres
     private function signaler($id)
     {
         if ($_SESSION['connected'] === 'yes') {
-            $this->_con = new ArticleManager();
+            $this->_con = new ChapitreManager();
             $this->_con->signalerComment(intval($id), 1);
         } else {
             throw new Exception('Connectez-vous !');

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
-*{
+
+* {
     font-family: Roboto;
 }
 
@@ -67,6 +68,14 @@ body {
     transition: 0.5s;
 }
 
+.nav-link:last-child::after {
+    background: #FB667A;
+}
+
+.nav-link:last-child::before {
+    background: #FB667A;
+}
+
 .nav-link:hover {
     color: #3498db;
 }
@@ -90,14 +99,18 @@ body {
     margin-left: 5px;
 }
 
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 .logo:nth-child(1) {
     font-weight: 900;
 }
 
 .logo:nth-child(2) {
     font-weight: 300;
-    position: relative;
-    top: 4px;
 }
 
 .menu_resp_close {
@@ -108,7 +121,7 @@ body {
     display: none;
 }
 
-footer{
+footer {
     position: absolute;
     bottom: 5;
     width: 100%;
@@ -124,31 +137,26 @@ footer{
     padding: 30px 0 0;
 }
 
-footer .social
-{
+footer .social {
     font-size: 2em;
 }
 
-footer .social *
-{
+footer .social * {
     color: white;
     margin: 0 5px;
 }
 
-footer .social *:hover
-{
+footer .social *:hover {
     color: #c1c1c1;
 }
 
-footer .plan
-{
+footer .plan {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 15px;
 }
 
-footer .plan a
-{
+footer .plan a {
     color: white;
     text-decoration: none;
     margin: 5px 5px;
@@ -156,18 +164,15 @@ footer .plan a
     font-size: 0.98em;
 }
 
-footer .plan a:hover
-{
+footer .plan a:hover {
     color: #f1503f;
 }
 
-footer .copy a
-{
+footer .copy a {
     color: white;
 }
 
-footer .copy
-{
+footer .copy {
     display: flex;
     justify-content: center;
     position: relative;
@@ -178,7 +183,7 @@ footer .copy
 }
 
 
-.error{
+.error {
     font-family: Roboto;
     color: white;
     background: #FB667A;
@@ -189,8 +194,7 @@ footer .copy
     text-align: center;
 }
 
-.button
-{
+.button {
     padding: 8px 110px;
     background-color: #FB667A;
     position: absolute;
@@ -203,8 +207,7 @@ footer .copy
     transition: 0.3s;
 }
 
-.button:hover
-{
+.button:hover {
     background-color: #d65e6b;
 }
 
@@ -213,6 +216,7 @@ footer .copy
     body {
         padding: 100px 0px 0 0;
     }
+
     /* MENU */
     .menu_lien {
         position: absolute;
@@ -221,6 +225,7 @@ footer .copy
         top: 0;
         height: 50px;
     }
+
     .menu_liens {
         position: absolute;
         float: none;
@@ -232,6 +237,7 @@ footer .copy
         width: 100%;
         height: 700%;
     }
+
     .menu_liens a {
         position: relative;
         top: -10px;
@@ -239,6 +245,7 @@ footer .copy
         font-size: 1.4em;
         font-weight: 100;
     }
+
     .menu_resp_close {
         position: absolute;
         top: 5px;
@@ -248,15 +255,18 @@ footer .copy
         font-size: 2em;
         cursor: pointer;
     }
+
     .menu_resp_close:hover {
         opacity: 0.7;
     }
+
     .menu_resp {
         display: block;
         color: white;
         font-size: 2em;
         cursor: pointer;
     }
+
     .menu_resp:hover {
         opacity: 0.7;
     }

@@ -45,7 +45,8 @@ require('config.php');
                 <b><?= $infos['auteur'] ?></b></p></i>
         <hr>
         <?php if ($_SESSION['connected'] === 'yes') { ?>
-            <form action="<?= $url ?>Chapitres/comment/<?= $infos['id'] ?>" method="POST">
+            <form action="<?= $url ?>Chapitres/comment/<?= $infos['id'] ?>/<?= filter_var($_SESSION['token'], FILTER_SANITIZE_STRING) ?>"
+                  method="POST">
                 <textarea placeholder="Envoyer un commentaire" name="comment"></textarea>
                 <input type="submit" name="envoyer" value="ENVOYER">
             </form>
@@ -56,9 +57,13 @@ require('config.php');
         <?php } ?>
         <p><i class="fas fa-comments"></i><b> Commentaires </b></p>
         <div class="allComments">
-            <?php foreach ($comments as $comment): ?>
+            <?php
+            rsort($comments);
+            foreach ($comments as $comment):
+                ?>
                 <div class="commentaire">
-                    <img class="avatarCom" src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png"
+                    <img class="avatarCom"
+                         src="<?= $url ?>assets/img/avatars/<?= $comment->avatar() ?>"
                          alt="avatar">
                     <div class="signalCom">
                         <p class="pseudoCom"><b><?= $comment->pseudo() ?> : </b></p>

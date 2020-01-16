@@ -309,9 +309,12 @@ body {
 
 .avatarCom {
     height: 90px;
+    width: 90px;
     position: relative;
     float: left;
     margin: 10px;
+    border-radius: 45px;
+    overflow: hidden;
 }
 
 .dateCom {
@@ -350,6 +353,7 @@ body {
 .signalCom a:hover {
     color: #de4232;
 }
+
 
 @media screen and (max-width: 700px) {
     .panelNav {

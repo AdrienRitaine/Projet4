@@ -1,11 +1,11 @@
 <?php
 
-class ArticleManager extends Model
+class ChapitreManager extends Model
 {
-    public function getArticles()
+    public function getChapitres()
     {
         $this->getBdd();
-        return $this->getAll('articles', 'Article');
+        return $this->getAll('articles', 'Chapitre');
     }
 
     public function getComments($id)
@@ -60,6 +60,12 @@ class ArticleManager extends Model
     {
         $this->getBdd();
         $this->deleteDataByInfo('commentaires', $data, $info);
+    }
+
+    public function getAvatar($pseudo)
+    {
+        $this->getBdd();
+        return $this->getDataByInfo('utilisateurs', 'avatar', 'pseudo', $pseudo);
     }
 }
 

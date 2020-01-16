@@ -13,7 +13,7 @@ class ControllerPanel
     private $_auteur;
 
     /**
-     * @var ArticleManager
+     * @var ChapitreManager
      */
     public function __construct($url)
     {
@@ -89,8 +89,8 @@ class ControllerPanel
     private function panel()
     {
         if ($_SESSION['permission'] == 1) {
-            $this->_con = new ArticleManager;
-            $this->_infos = array('article' => $this->_con->getArticles(), 'erreur' => $this->_errorMsg);
+            $this->_con = new ChapitreManager;
+            $this->_infos = array('chapitres' => $this->_con->getChapitres(), 'erreur' => $this->_errorMsg);
             $infos = $this->_infos;
 
             $this->_view = new View('Panel', 1);
@@ -121,7 +121,7 @@ class ControllerPanel
             $this->_contenu = $array['contenu'];
             $this->_auteur = $_SESSION['pseudo'];
 
-            $this->_con = new ArticleManager();
+            $this->_con = new ChapitreManager();
 
             $data = array(
                 'titre' => $this->_titre,
@@ -142,7 +142,7 @@ class ControllerPanel
         if ($_SESSION['permission'] == 1) {
             if ($token == $_SESSION['token']) {
                 if ($id) {
-                    $this->_con = new ArticleManager();
+                    $this->_con = new ChapitreManager();
                     $this->_con->deleteChapter(intval($id));
                     $this->panel();
                 } else {
@@ -161,7 +161,7 @@ class ControllerPanel
         if ($_SESSION['permission'] == 1) {
             if ($token == $_SESSION['token']) {
                 if ($id) {
-                    $this->_con = new ArticleManager();
+                    $this->_con = new ChapitreManager();
                     $this->_con->deleteComments('id', intval($id));
                     $this->signal();
                 } else {
@@ -179,7 +179,7 @@ class ControllerPanel
     {
         if ($_SESSION['permission'] == 1) {
             if ($id) {
-                $this->_con = new ArticleManager();
+                $this->_con = new ChapitreManager();
                 $this->_con->signalerComment(intval($id), 0);
                 $this->signal();
             } else {
@@ -195,7 +195,7 @@ class ControllerPanel
     {
         if ($_SESSION['permission'] == 1) {
             if ($id) {
-                $this->_con = new ArticleManager();
+                $this->_con = new ChapitreManager();
                 $chapitre = $this->_con->getChapitre($id);
                 foreach ($chapitre as $value) {
                     $this->_titre = $value['titre'];
@@ -219,7 +219,7 @@ class ControllerPanel
             $this->_titre = $array['titre'];
             $this->_contenu = $array['contenu'];
 
-            $this->_con = new ArticleManager();
+            $this->_con = new ChapitreManager();
 
             $data = array(
                 'titre' => $this->_titre,
@@ -235,7 +235,7 @@ class ControllerPanel
     private function signal()
     {
         if ($_SESSION['permission'] == 1) {
-            $this->_con = new ArticleManager;
+            $this->_con = new ChapitreManager;
             $this->_infos = array('comments' => $this->_con->getCommentBySignal(), 'erreur' => $this->_errorMsg);
             $infos = $this->_infos;
 
@@ -267,7 +267,7 @@ class ControllerPanel
                 if ($id) {
                     $this->_con = new UserManager();
                     $this->_con->deleteUser(intval($id));
-                    $this->_con = new ArticleManager();
+                    $this->_con = new ChapitreManager();
                     $this->_con->deleteComments('id_pseudo', intval($id));
                     $this->membres();
                 } else {

@@ -6,6 +6,7 @@ class User
     private $_pseudo;
     private $_email;
     private $_status;
+    private $_avatar;
 
     // Constructeur
     public function __construct(array $data)
@@ -57,6 +58,13 @@ class User
         $this->_status = $status;
     }
 
+    public function setAvatar($avatar)
+    {
+        if (is_string($avatar)) {
+            $this->_avatar = $avatar;
+        }
+    }
+
     // Getter
     public function id()
     {
@@ -76,6 +84,11 @@ class User
     public function status()
     {
         return $this->_status;
+    }
+
+    public function avatar()
+    {
+        return $this->_avatar;
     }
 }
 
