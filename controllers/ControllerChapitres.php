@@ -66,9 +66,9 @@ class ControllerChapitres
         $chapitre = $this->_con->getChapitre($id);
         $comment = $this->_con->getComments($id);
         foreach ($chapitre as $value) {
-            $this->_titre = $value['titre'];
-            $this->_contenu = $value['contenu'];
-            $this->_auteur = $value['auteur'];
+            $this->_titre = $value['title'];
+            $this->_contenu = $value['content'];
+            $this->_auteur = $value['pseudo'];
             $this->_date = $value['date_creation'];
         }
         $infos = array('titre' => $this->_titre, 'contenu' => $this->_contenu, 'id' => $id, 'auteur' => $this->_auteur, 'date' => $this->_date, 'error' => $this->_errorMsg);
@@ -83,11 +83,11 @@ class ControllerChapitres
                 $this->_con = new UserManager();
                 $data = array(
                     'pseudo' => $_SESSION['pseudo'],
-                    'commentaire' => htmlspecialchars(addslashes($array['comment'])),
+                    'comment' => htmlspecialchars(addslashes($array['comment'])),
                     'date' => date("Y-m-d  H:i:s"),
-                    'signalement' => 0,
-                    'id_article' => $id,
-                    'id_pseudo' => $this->_con->getInfoUser($_SESSION['pseudo'], $_SESSION['password'], 'id'),
+                    'signals' => 0,
+                    'article_id' => $id,
+                    'pseudo_id' => $this->_con->getInfoUser($_SESSION['pseudo'], $_SESSION['password'], 'id'),
                 );
                 $this->_con = new ChapitreManager();
                 $this->_con->addComment($data);

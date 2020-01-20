@@ -4,9 +4,9 @@ class Comment
 {
     private $_id;
     private $_pseudo;
-    private $_commentaire;
+    private $_comment;
     private $_date;
-    private $_signalement;
+    private $_signal;
     private $_id_article;
     private $_con;
     private $_avatar;
@@ -47,10 +47,10 @@ class Comment
         }
     }
 
-    public function setCommentaire($commentaire)
+    public function setComment($comment)
     {
-        if (is_string($commentaire)) {
-            $this->_commentaire = stripslashes($commentaire);
+        if (is_string($comment)) {
+            $this->_comment = stripslashes($comment);
         }
     }
 
@@ -59,10 +59,10 @@ class Comment
         $this->_date = date('d/m/Y à H:i:s', strtotime($date));
     }
 
-    public function setSignalement($signalement)
+    public function setSignal($signal)
     {
-        if (is_int($signalement)) {
-            $this->_signalement = $signalement;
+        if (is_int($signal)) {
+            $this->_signal = $signal;
         }
     }
 
@@ -84,9 +84,9 @@ class Comment
         return $this->_pseudo;
     }
 
-    public function commentaire()
+    public function comment()
     {
-        return $this->_commentaire;
+        return $this->_comment;
     }
 
     public function date()
@@ -99,7 +99,7 @@ class Comment
         return $this->_signalement;
     }
 
-    public function id_signalement()
+    public function id_article()
     {
         return $this->_id_article;
     }

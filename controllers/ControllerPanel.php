@@ -124,10 +124,10 @@ class ControllerPanel
             $this->_con = new ChapitreManager();
 
             $data = array(
-                'titre' => $this->_titre,
-                'contenu' => $this->_contenu,
+                'title' => addslashes($this->_titre),
+                'content' => addslashes($this->_contenu),
                 'date_creation' => date("Y-m-d  H:i:s"),
-                'auteur' => $this->_auteur
+                'pseudo' => $this->_auteur
             );
 
             $this->_con->addChapitre($data);
@@ -198,8 +198,8 @@ class ControllerPanel
                 $this->_con = new ChapitreManager();
                 $chapitre = $this->_con->getChapitre($id);
                 foreach ($chapitre as $value) {
-                    $this->_titre = $value['titre'];
-                    $this->_contenu = $value['contenu'];
+                    $this->_titre = $value['title'];
+                    $this->_contenu = $value['content'];
                 }
                 $infos = array('titre' => $this->_titre, 'contenu' => $this->_contenu, 'id' => $id);
                 $this->_view = new View('EditChapitre', 1);
@@ -222,8 +222,8 @@ class ControllerPanel
             $this->_con = new ChapitreManager();
 
             $data = array(
-                'titre' => $this->_titre,
-                'contenu' => $this->_contenu
+                'titre' => addslashes($this->_titre),
+                'contenu' => addslashes($this->_contenu)
             );
 
             $this->_con->updateChapitre($data, $array['id']);
@@ -267,8 +267,6 @@ class ControllerPanel
                 if ($id) {
                     $this->_con = new UserManager();
                     $this->_con->deleteUser(intval($id));
-                    $this->_con = new ChapitreManager();
-                    $this->_con->deleteComments('id_pseudo', intval($id));
                     $this->membres();
                 } else {
                     throw new Exception('Page introuvable !');

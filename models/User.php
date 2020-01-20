@@ -7,6 +7,7 @@ class User
     private $_email;
     private $_status;
     private $_avatar;
+    private $_permission;
 
     // Constructeur
     public function __construct(array $data)
@@ -51,6 +52,13 @@ class User
         }
     }
 
+    public function setPermission($permission)
+    {
+
+        $permission = (int)$permission;
+        $this->_permission = $permission;
+    }
+
     public function setStatus($status)
     {
         $status = (int)$status;
@@ -79,6 +87,11 @@ class User
     public function email()
     {
         return $this->_email;
+    }
+
+    public function permission()
+    {
+        return $this->_permission;
     }
 
     public function status()

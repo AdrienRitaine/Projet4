@@ -27,13 +27,13 @@ require('config.php');
                     </div>
                     <div class="extraitInfo">
                         <i class="fas fa-pen"></i>
-                        <p><?= $chapitre->auteur() ?></p>
+                        <p><?= $chapitre->pseudo() ?></p>
                     </div>
                 </div>
                 <div class="extraitDesc">
-                    <h2><?= $chapitre->titre() ?></h2>
+                    <h2><?= $chapitre->title() ?></h2>
                     <div>
-                        <p><?= $chapitre->contenu() ?></p>
+                        <p><?= $chapitre->content() ?></p>
                     </div>
                     <a href="<?= $url ?>Chapitres/v/<?= $chapitre->id() ?>">Lire plus...</a>
                 </div>

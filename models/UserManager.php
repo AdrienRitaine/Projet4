@@ -12,7 +12,7 @@ class UserManager extends Model
         );
 
         $this->getBdd();
-        return $this->getWhereUser('utilisateurs', $data);
+        return $this->getWhereUser('users', $data);
     }
 
     // Retourne l'information demander
@@ -24,7 +24,7 @@ class UserManager extends Model
         );
 
         $this->getBdd();
-        return $this->getWhereUserInfo('utilisateurs', $data, $info);
+        return $this->getWhereUserInfo('users', $data, $info);
     }
 
     // Retourne l'information demander
@@ -40,7 +40,7 @@ class UserManager extends Model
         $data = array(
             'pseudo' => addslashes($pseudo),
             'email' => addslashes($email),
-            'motdepasse' => $password,
+            'password' => $password,
             'permission' => 0,
             'recovery' => rand(),
             'status' => 0,
@@ -48,14 +48,14 @@ class UserManager extends Model
         );
 
         $this->getBdd();
-        $this->addData('utilisateurs', $data);
+        $this->addData('users', $data);
     }
 
     // Vérifie une information dans le base de donnée
     public function verifyInfo($info, $data)
     {
         $this->getBdd();
-        return $this->verifyInfomation('utilisateurs', $info, $data);
+        return $this->verifyInfomation('users', $info, $data);
     }
 
     public function recovery_exist($recovery, $id)
@@ -73,22 +73,22 @@ class UserManager extends Model
     public function getUsers()
     {
         $this->getBdd();
-        return $this->getAll('utilisateurs', 'User');
+        return $this->getAll('users', 'User');
     }
 
     public function deleteUser($id)
     {
         $this->getBdd();
-        $this->deleteDataByInfo('utilisateurs', 'id', $id);
+        $this->deleteDataByInfo('users', 'id', $id);
     }
 
     public function blockUsers($id)
     {
         $this->getBdd();
-        if ($this->verifyInfomationById('utilisateurs', 'status', 0, $id)) {
-            $this->updateDataById('utilisateurs', $id, 'status', 1);
+        if ($this->verifyInfomationById('users', 'status', 0, $id)) {
+            $this->updateDataById('users', $id, 'status', 1);
         } else {
-            $this->updateDataById('utilisateurs', $id, 'status', 0);
+            $this->updateDataById('users', $id, 'status', 0);
         }
 
     }
@@ -96,7 +96,7 @@ class UserManager extends Model
     public function updateAvatar($avatar, $id)
     {
         $this->getBdd();
-        $this->updateDataById('utilisateurs', $id, 'avatar', $avatar);
+        $this->updateDataById('users', $id, 'avatar', $avatar);
     }
 }
 

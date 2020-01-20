@@ -3,10 +3,10 @@
 class Chapitre
 {
     private $_id;
-    private $_titre;
-    private $_contenu;
+    private $_title;
+    private $_content;
     private $_date_creation;
-    private $_auteur;
+    private $_pseudo;
 
     // Constructeur
     public function __construct(array $data)
@@ -37,17 +37,17 @@ class Chapitre
         }
     }
 
-    public function setTitre($titre)
+    public function setTitle($title)
     {
-        if (is_string($titre)) {
-            $this->_titre = $titre;
+        if (is_string($title)) {
+            $this->_title = $title;
         }
     }
 
-    public function setContenu($contenu)
+    public function setContent($content)
     {
-        if (is_string($contenu)) {
-            $this->_contenu = $contenu;
+        if (is_string($content)) {
+            $this->_content = $content;
         }
     }
 
@@ -56,10 +56,10 @@ class Chapitre
         $this->_date_creation = date('d/m/Y', strtotime($date_creation));
     }
 
-    public function setAuteur($auteur)
+    public function setPseudo($pseudo)
     {
-        if (is_string($auteur)) {
-            $this->_auteur = $auteur;
+        if (is_string($pseudo)) {
+            $this->_pseudo = $pseudo;
         }
     }
 
@@ -69,14 +69,14 @@ class Chapitre
         return $this->_id;
     }
 
-    public function titre()
+    public function title()
     {
-        return $this->_titre;
+        return $this->_title;
     }
 
-    public function contenu()
+    public function content()
     {
-        return $this->_contenu;
+        return $this->_content;
     }
 
     public function date_creation()
@@ -84,9 +84,9 @@ class Chapitre
         return $this->_date_creation;
     }
 
-    public function auteur()
+    public function pseudo()
     {
-        return $this->_auteur;
+        return $this->_pseudo;
     }
 }
 

@@ -9,24 +9,34 @@ require('config.php');
 
 <section class="body">
     <table>
+        <thead>
         <tr>
             <th>PSEUDO</th>
             <th>EMAIL</th>
             <th>ACTION</th>
             <th>STATUS</th>
         </tr>
+        </thead>
+        <tbody>
         <?php if (count($infos['membres'])) { ?>
-            <?php foreach ($infos['membres'] as $comment): ?>
+            <?php foreach ($infos['membres'] as $membre): ?>
                 <tr>
-                    <td><?= $comment->pseudo() ?></td>
-                    <td><?= $comment->email() ?></td>
+                    <td><?= $membre->pseudo() ?></td>
+                    <td><?= $membre->email() ?></td>
                     <td class="action">
-                        <a href="<?= $url ?>Panel/deleteUser/<?= $comment->id() ?>/<?= $_SESSION['token'] ?>"><i
-                                    class="fas fa-trash-alt"></i></a>
+                        <?php if ($membre->permission() == false) { ?>
+                            <a href="<?= $url ?>Panel/deleteUser/<?= $membre->id() ?>/<?= $_SESSION['token'] ?>"><i
+                                        class="fas fa-trash-alt"></i></a>
+                        <?php } ?>
                     </td>
-                    <td><a href="<?= $url ?>Panel/blockUser/<?= $comment->id() ?>/<?= $_SESSION['token'] ?>"
-                           class="ban"><?php if ($comment->status() == 0) { ?>Bloqué <?php } else { ?> Débloqué <?php } ?>
-                            <i class="fas fa-ban"></i></a></td>
+
+                    <td>
+                        <?php if ($membre->permission() == false) { ?>
+                            <a href="<?= $url ?>Panel/blockUser/<?= $membre->id() ?>/<?= $_SESSION['token'] ?>"
+                               class="ban"><?php if ($membre->status() == 0) { ?>Bloqué <?php } else { ?> Débloqué <?php } ?>
+                                <i class="fas fa-ban"></i></a>
+                        <?php } ?>
+                    </td>
                 </tr>
             <?php endforeach ?>
         <?php } else { ?>
@@ -34,6 +44,7 @@ require('config.php');
                 <td colspan="3">Aucun membre</td>
             </tr>
         <?php } ?>
+        </tbody>
     </table>
 </section>
 

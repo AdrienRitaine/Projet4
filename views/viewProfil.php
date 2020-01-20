@@ -29,10 +29,14 @@ require('config.php');
             <label for="passwordConfirm"><i class="fas fa-lock"></i> Confirmer le nouveau mot de passe</label>
             <input class="password inputText" type="password" name="passwordConfirm">
             <button class="editPassword"><i class="fas fa-key"></i> Modifier le mot de passe</button>
+            <?= $infos['error'] ?>
         </form>
-        <a class="delete" href="#"><i class="fas fa-trash-alt"></i> Supprimer mon compte </a>
+        <?php if ($_SESSION['permission'] == false) { ?>
+            <a class="delete"
+               href="<?= $url ?>profil/delete/<?= $infos['id'] ?>/<?= filter_var($_SESSION['token'], FILTER_SANITIZE_STRING) ?>"><i
+                        class="fas fa-trash-alt"></i> Supprimer mon compte </a>
+        <?php } ?>
     </div>
-    <?= $infos['error'] ?>
 </section>
 
 

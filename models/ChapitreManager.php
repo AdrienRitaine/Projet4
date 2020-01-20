@@ -11,13 +11,13 @@ class ChapitreManager extends Model
     public function getComments($id)
     {
         $this->getBdd();
-        return $this->getCommentsById('commentaires', 'Comment', $id);
+        return $this->getCommentsById('comments', 'Comment', $id);
     }
 
     public function getCommentBySignal()
     {
         $this->getBdd();
-        return $this->getCommentsBySignals('commentaires', 'Comment');
+        return $this->getCommentsBySignals('comments', 'Comment');
     }
 
     public function getChapitre($id)
@@ -35,7 +35,7 @@ class ChapitreManager extends Model
     public function addComment($data)
     {
         $this->getBdd();
-        $this->addData('commentaires', $data);
+        $this->addData('comments', $data);
     }
 
     public function signalerComment($id, $signal)
@@ -59,13 +59,13 @@ class ChapitreManager extends Model
     public function deleteComments($data, $info)
     {
         $this->getBdd();
-        $this->deleteDataByInfo('commentaires', $data, $info);
+        $this->deleteDataByInfo('comments', $data, $info);
     }
 
     public function getAvatar($pseudo)
     {
         $this->getBdd();
-        return $this->getDataByInfo('utilisateurs', 'avatar', 'pseudo', $pseudo);
+        return $this->getDataByInfo('users', 'avatar', 'pseudo', $pseudo);
     }
 }
 

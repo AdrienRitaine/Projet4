@@ -58,23 +58,28 @@ require('config.php');
         <p><i class="fas fa-comments"></i><b> Commentaires </b></p>
         <div class="allComments">
             <?php
+
             rsort($comments);
-            foreach ($comments as $comment):
-                ?>
-                <div class="commentaire">
-                    <img class="avatarCom"
-                         src="<?= $url ?>assets/img/avatars/<?= $comment->avatar() ?>"
-                         alt="avatar">
-                    <div class="signalCom">
-                        <p class="pseudoCom"><b><?= $comment->pseudo() ?> : </b></p>
-                        <?php if ($_SESSION['connected'] === 'yes') { ?>
-                            <a class="url" value="<?= $comment->id() ?>"><i class="fas fa-exclamation-triangle"></i></a>
-                        <?php } ?>
+            if (count($comments)) {
+                foreach ($comments as $comment):
+                    ?>
+                    <div class="commentaire">
+                        <img class="avatarCom"
+                             src="<?= $url ?>assets/img/avatars/<?= $comment->avatar() ?>"
+                             alt="avatar">
+                        <div class="signalCom">
+                            <p class="pseudoCom"><b><?= $comment->pseudo() ?> : </b></p>
+                            <?php if ($_SESSION['connected'] === 'yes') { ?>
+                                <a class="url" value="<?= $comment->id() ?>"><i class="fas fa-exclamation-triangle"></i></a>
+                            <?php } ?>
+                        </div>
+                        <p class="commentCom"><?= $comment->comment() ?></p>
+                        <p class="dateCom"><i><b>Le <?= $comment->date() ?></b></i></p>
                     </div>
-                    <p class="commentCom"><?= $comment->commentaire() ?></p>
-                    <p class="dateCom"><i><b>Le <?= $comment->date() ?></b></i></p>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php } else { ?>
+                <p>Aucun commentaire.</p>
+            <?php } ?>
         </div>
 
     </div>

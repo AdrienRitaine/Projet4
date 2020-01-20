@@ -23,8 +23,8 @@ require('config.php');
         <?php if (count($infos['chapitres'])) { ?>
             <?php foreach ($infos['chapitres'] as $chapitre): ?>
                 <tr>
-                    <td data-title="Auteur"><?= $chapitre->auteur() ?></td>
-                    <td data-title="Titre"><?= $chapitre->titre() ?></td>
+                    <td data-title="Auteur"><?= $chapitre->pseudo() ?></td>
+                    <td data-title="Titre"><?= $chapitre->title() ?></td>
                     <td data-title="Date"><?= $chapitre->date_creation() ?></td>
                     <td class="action" data-title="Action">
                         <a href="<?= $url ?>Panel/delete/<?= $chapitre->id() ?>/<?= $_SESSION['token'] ?>"><i

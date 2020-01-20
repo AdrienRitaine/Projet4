@@ -169,6 +169,9 @@ input[type=email]:not(:focus):invalid {
 }
 
 .formBloc .submit {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background-color: #2980b9;
     height: 35px;
     color: white;
