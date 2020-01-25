@@ -27,7 +27,6 @@ class Router
 
             spl_autoload_register('chargerClasse');
 
-
             $url = '';
 
             // Choix du controller par rapport a l'url
