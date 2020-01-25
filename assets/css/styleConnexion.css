@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +13,6 @@ body{
     height: 400px;
     background-color: #2c3e50;
     margin-bottom: 20px;
-    margin-top: 20px;
     border-radius: 5px;
     font-family: Roboto;
     font-weight: 300;
@@ -170,10 +169,13 @@ input[type=email]:not(:focus):invalid {
 }
 
 .formBloc .submit {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background-color: #2980b9;
+    height: 35px;
     color: white;
     letter-spacing: 1px;
-    padding-top: 2px;
     transition: 0.5s;
     margin: 25px 0 5px 0;
 }
@@ -181,4 +183,8 @@ input[type=email]:not(:focus):invalid {
 .formBloc .submit:hover {
     background-color: #3498db;
     cursor: pointer;
+}
+
+footer {
+    display: none;
 }

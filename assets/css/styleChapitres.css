@@ -20,7 +20,7 @@ body {
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     display: flex;
     justify-content: center;
-    margin-bottom: 500px;
+    margin-bottom: 50px;
 }
 
 /* ARTICLES 2 */
@@ -73,13 +73,21 @@ body {
 }
 
 .extraitDesc p{
+    margin-top: -5px;
     font-weight: 100;
-    height: 115px;
     overflow: hidden;
 }
 
 .extraitDesc a{
     color: white;
+}
+
+.extraitDesc div
+{
+    margin-top: -20px;
+    margin-bottom: 15px;
+    height: 60px;
+    overflow: hidden;
 }
 
 .extraitInfos{
@@ -96,6 +104,7 @@ body {
 
 .extraitInfo i{
     margin: 10px;
+    color: #2574a8;
 }
 
 .extraitBloc:hover .extraitImg{

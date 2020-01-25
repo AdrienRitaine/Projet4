@@ -1,17 +1,17 @@
 <?php
 
-
-
 class View
 {
     private $_file;
     private $_t;
     private $_style;
-    
+    private $_titre;
+    private $_template;
 
-    public function __construct($action)
+    public function __construct($action, $template)
     {
-        $this->_file = 'views/view'.$action.'.php';
+        $this->_file = 'views/view'.ucfirst($action).'.php';
+        $this->_template = $template;
     }
 
     // Génére & affiche la vue
@@ -20,7 +20,18 @@ class View
         $content = $this->generateFile($this->_file, $data);
     
         // Template
-        $view = $this->generateFile('views/template.php', array('t' => $this->_t, 'style' => $this->_style, 'content' => $content));
+        if($this->_template == 0)
+        {
+            $view = $this->generateFile('views/templates/template.php', array('t' => $this->_t, 'style' => $this->_style, 'content' => $content));
+        }
+        else if ($this->_template == 1)
+        {
+            $view = $this->generateFile('views/templates/templatePanel.php', array('t' => $this->_t, 'style' => $this->_style, 'titre' => $this->_titre, 'content' => $content));
+        }
+        else
+        {
+            throw new Exception('Page introuvable !');
+        }
 
         echo $view;
     }
@@ -32,7 +43,7 @@ class View
         {
             extract($data); 
 
-            ob_start();
+            ob_start('ob_gzhandler');
 
             require $file;
 

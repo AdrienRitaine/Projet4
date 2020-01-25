@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+.error404
+{
+    width: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.errortype
+{
+    font-size: 0.8em;
+}
+
+
+.logo404
+{
+    text-align: center;
+    color: #3498db;
+    font-size: 4.7em;
+    font-weight: 900;
+}
+
+.logo404 i
+{
+    font-size: 0.7em;
+    position: relative;
+    bottom: 10px;
+}
+
+.error404 h2
+{
+    font-family: Roboto;
+    letter-spacing: 1px;
+    font-weight: 900;
+    color: #e74c3c;
+    position: relative;
+    bottom: 110px;
+}
+
+.error404 p
+{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    color: #c1c1c1;
+    position: relative;
+    bottom: 110px;
+}
+
+footer
+{
+    display: none;
+}
