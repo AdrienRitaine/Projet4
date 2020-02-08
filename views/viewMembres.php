@@ -7,7 +7,7 @@ require('config.php');
 
 ?>
 
-<section class="body">
+<main class="body">
     <table>
         <thead>
         <tr>
@@ -46,5 +46,5 @@ require('config.php');
         <?php } ?>
         </tbody>
     </table>
-</section>
+</main>
 

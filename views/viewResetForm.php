@@ -5,7 +5,7 @@ require('config.php');
 ?>
 
 <!-- LOGFORM -->
-<div class="logForm">
+<main class="logForm">
     <div class="chooseForm">
         <a id="connexion">Mot de passe oublié ?</a>
     </div>
@@ -20,4 +20,4 @@ require('config.php');
         </form>
         <?= $infos['error'] ?>
     </div>
-</div>
+</main>

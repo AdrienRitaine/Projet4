@@ -7,7 +7,7 @@ require('config.php');
 
 ?>
 
-<section class="body">
+<main class="body">
     <a href="<?= $url ?>Panel/new" class="ajouterChapitre"><i class="fas fa-plus"></i></a>
 
     <table>
@@ -40,7 +40,7 @@ require('config.php');
         <?php } ?>
         </tbody>
     </table>
-</section>
+</main>
 
 
 

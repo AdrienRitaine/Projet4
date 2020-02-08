@@ -11,10 +11,7 @@ class ControllerPanel
     private $_titre;
     private $_contenu;
     private $_auteur;
-
-    /**
-     * @var ChapitreManager
-     */
+    
     public function __construct($url)
     {
         if ($url && count($url) > 4) {

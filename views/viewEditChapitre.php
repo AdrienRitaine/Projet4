@@ -45,7 +45,7 @@ require('config.php');
 </script>
 
 
-<section class="body">
+<main class="body">
     <form action="<?= $url ?>Panel/editChapter" method="POST" id="newChapitre">
         <label for="titre">Titre :</label>
         <input type="text" id="titre" name="titre" value="<?= $infos['titre'] ?>">
@@ -54,7 +54,7 @@ require('config.php');
         <input type="hidden" name="id" value="<?= $infos['id'] ?>">
         <input type="submit" class="button" value="MODIFIER">
     </form>
-</section>
+</main>
 
 
 

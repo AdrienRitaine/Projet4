@@ -7,7 +7,7 @@ require('config.php');
 
 ?>
 
-<section class="body">
+<main class="body">
     <table>
         <tr>
             <th>PSEUDO</th>
@@ -33,7 +33,7 @@ require('config.php');
         <?php } ?>
 
     </table>
-</section>
+</main>
 
 
 

@@ -4,7 +4,7 @@ $this->_style = "Connexion";
 require('config.php');
 ?>
 
-    <div class="logForm">
+    <main class="logForm">
         <div class="chooseForm">
             <a id="connexion">Mot de passe oublié ?</a>
         </div>
@@ -16,5 +16,5 @@ require('config.php');
             </form>
             <a class="button" href="<?= $url ?>Connexion">Retour</a>
         </div>
-    </div>
-<?=  $errorMsg ?>
+    </main>
+<?= $errorMsg ?>
