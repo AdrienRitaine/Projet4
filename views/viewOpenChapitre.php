@@ -37,26 +37,31 @@ require('config.php');
     });
 </script>
 
-<section class="section">
-    <div class="showChapitre">
+<main class="section">
+    <aside class="showChapitre">
         <h2><?= $infos['titre'] ?></h2>
         <?= $infos['contenu'] ?>
         <i><p class="date">Publié le <?= date('d/m/Y à H:i:s', strtotime($infos['date'])) ?> par
                 <b><?= $infos['auteur'] ?></b></p></i>
         <hr>
+        
         <?php if ($_SESSION['connected'] === 'yes') { ?>
+
             <form action="<?= $url ?>Chapitres/comment/<?= $infos['id'] ?>/<?= filter_var($_SESSION['token'], FILTER_SANITIZE_STRING) ?>"
                   method="POST">
                 <textarea placeholder="Envoyer un commentaire" name="comment"></textarea>
                 <input type="submit" name="envoyer" value="ENVOYER">
             </form>
             <?= $infos['error'] ?>
+
         <?php } else { ?>
             <p class="chapitreP"><i class="fas fa-exclamation-circle"></i> Pour commenter, connectes-toi ! <a
                         href="<?= $url ?>connexion">Allez se connecter.</a></p>
         <?php } ?>
+
         <p><i class="fas fa-comments"></i><b> Commentaires </b></p>
         <div class="allComments">
+
             <?php
 
             rsort($comments);
@@ -80,10 +85,11 @@ require('config.php');
             <?php } else { ?>
                 <p>Aucun commentaire.</p>
             <?php } ?>
+
         </div>
 
-    </div>
-</section>
+    </aside>
+</main>
 
 
 

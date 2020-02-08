@@ -7,7 +7,7 @@ class ControllerChapitres
     private $_articleManager;
     private $_view;
     private $_titre;
-    private $_contenu;
+    private $_content;
     private $_auteur;
     private $_date;
     private $_avatar;
@@ -67,11 +67,11 @@ class ControllerChapitres
         $comment = $this->_con->getComments($id);
         foreach ($chapitre as $value) {
             $this->_titre = $value['title'];
-            $this->_contenu = $value['content'];
+            $this->_content = $value['content'];
             $this->_auteur = $value['pseudo'];
             $this->_date = $value['date_creation'];
         }
-        $infos = array('titre' => $this->_titre, 'contenu' => $this->_contenu, 'id' => $id, 'auteur' => $this->_auteur, 'date' => $this->_date, 'error' => $this->_errorMsg);
+        $infos = array('titre' => $this->_titre, 'contenu' => $this->_content, 'id' => $id, 'auteur' => $this->_auteur, 'date' => $this->_date, 'error' => $this->_errorMsg);
         $this->_view = new View('openChapitre', 0);
         $this->_view->generate(array('infos' => $infos, 'comments' => $comment));
     }

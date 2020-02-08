@@ -94,6 +94,7 @@ class ControllerConnexion
         {
             if ($this->_con->getInfoUser($this->_pseudo, $this->_password, 'status') != 1) {
                 $this->_permission = $this->_con->getInfoUser($this->_pseudo, $this->_password, 'permission'); // Récupération de la permission
+                
                 $_SESSION['pseudo'] = $this->_pseudo;
                 $_SESSION['password'] = $this->_password;
                 $_SESSION['userId'] = $this->_con->getInfoUser($this->_pseudo, $this->_password, 'id');

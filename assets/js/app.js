@@ -25,23 +25,3 @@ menuClose.addEventListener("click", function () {
     menu.style.display = "none";
     menu.style.transition = "0.5s";
 });
-
-// FORMULAIRE DE CONNEXION
-
-var login = document.getElementById("loginForm");
-var inscrire = document.getElementById("signinForm");
-document.getElementById('connexion').addEventListener("click", function (e) {
-    document.getElementById('logForm').style.height = '400px';
-    login.style.display = "block";
-    inscrire.style.display = "none";
-    this.style.opacity = "1";
-    document.getElementById("inscrire").style.opacity = "0.5";
-
-});
-document.getElementById('inscrire').addEventListener("click", function (e) {
-    document.getElementById('logForm').style.height = '540px';
-    login.style.display = "none";
-    inscrire.style.display = "block";
-    this.style.opacity = "1";
-    document.getElementById("connexion").style.opacity = "0.5";
-});

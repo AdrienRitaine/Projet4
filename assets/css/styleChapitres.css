@@ -9,15 +9,25 @@ body {
     margin: 100px 0;
 }
 
+.title {
+    position: relative;
+    margin: 150px 0 100px 0;
+    font-size: 2em;
+    width: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+}
+
 /* SECTION */
 
-.section{
+.section {
     padding: 25px 0 25px 0;
     width: 100%;
     background: #222f3e;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
@@ -26,7 +36,7 @@ body {
 /* ARTICLES 2 */
 
 
-.sectionExtrait{
+.sectionExtrait {
     width: 900px;
     margin: 0 170px;
     display: flex;
@@ -35,7 +45,7 @@ body {
     flex-wrap: wrap;
 }
 
-.extraitBloc{
+.extraitBloc {
     position: relative;
     width: 350px;
     background: #2c3e50;
@@ -47,13 +57,13 @@ body {
     cursor: default;
 }
 
-.extraitImg{
+.extraitImg {
     position: relative;
     width: 100%;
     transition: 0.3s all;
 }
 
-.extraitPlus{
+.extraitPlus {
     position: absolute;
     font-size: 3em;
     left: 50%;
@@ -64,71 +74,72 @@ body {
     opacity: 0;
 }
 
-.extraitDesc{
+.extraitDesc {
     margin: 10px 20px;
 }
 
-.extraitDesc h2{
+.extraitDesc h2 {
     transition: 0.3s all;
 }
 
-.extraitDesc p{
+.extraitDesc p {
     margin-top: -5px;
     font-weight: 100;
     overflow: hidden;
 }
 
-.extraitDesc a{
+.extraitDesc a {
     color: white;
 }
 
-.extraitDesc div
-{
+.extraitDesc div {
     margin-top: -20px;
     margin-bottom: 15px;
     height: 60px;
     overflow: hidden;
 }
 
-.extraitInfos{
+.extraitInfos {
     display: flex;
     margin-bottom: -20px;
 }
 
-.extraitInfo{
+.extraitInfo {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 5px 10px;
 }
 
-.extraitInfo i{
+.extraitInfo i {
     margin: 10px;
     color: #2574a8;
 }
 
-.extraitBloc:hover .extraitImg{
+.extraitBloc:hover .extraitImg {
     filter: sepia(100%);
     transform: scale(1.1);
 }
-.extraitBloc:hover .extraitPlus{
+
+.extraitBloc:hover .extraitPlus {
     opacity: 1;
 }
 
-.extraitBloc:hover .extraitDesc h2{
+.extraitBloc:hover .extraitDesc h2 {
     color: #FB667A;
 }
-
 
 
 @media screen and (max-width: 500px) {
     .infos {
         height: 40px;
     }
+
     .infos p {
         margin-top: 135px;
         margin-right: 10px;
     }
+
     .infos i {
         margin-right: 4px;
     }

@@ -5,8 +5,8 @@ require('config.php');
 
 ?>
 
-<section class="section">
-    <div class="sectionExtrait">
+<main class="section">
+    <aside class="sectionExtrait">
         <div id="back"></div>
         <form action="<?= $url ?>profil/avatar/<?= $infos['id'] ?>/<?= filter_var($_SESSION['token'], FILTER_SANITIZE_STRING) ?>"
               method="post" enctype="multipart/form-data">
@@ -36,8 +36,8 @@ require('config.php');
                href="<?= $url ?>profil/delete/<?= $infos['id'] ?>/<?= filter_var($_SESSION['token'], FILTER_SANITIZE_STRING) ?>"><i
                         class="fas fa-trash-alt"></i> Supprimer mon compte </a>
         <?php } ?>
-    </div>
-</section>
+    </aside>
+</main>
 
 
 

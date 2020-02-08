@@ -8,17 +8,17 @@ require('config.php');
 
 
 <header>
-    <h2>Jean Forteroche</h2>
+    <h1>Jean Forteroche</h1>
     <cite>"Un billet simple pour l'Alaska."</cite>
 </header>
 <section class="section">
     <h2 class="sectionTitle">Dernières publication</h2>
-    <div class="sectionExtrait">
+    <aside class="sectionExtrait">
         <?php
         $i = 0;
         foreach ($chapitres as $chapitre):
             ?>
-            <div class="extraitBloc">
+            <figure class="extraitBloc">
                 <img class="extraitImg" src="<?= $url ?>assets/img/header.png" alt="montagne">
                 <div class="extraitInfos">
                     <div class="extraitInfo">
@@ -33,16 +33,16 @@ require('config.php');
                 <div class="extraitDesc">
                     <h2><?= $chapitre->title() ?></h2>
                     <div>
-                        <p><?= $chapitre->content() ?></p>
+                        <?= $chapitre->content() ?>
                     </div>
                     <a href="<?= $url ?>Chapitres/v/<?= $chapitre->id() ?>">Lire plus...</a>
                 </div>
-            </div>
+            </figure>
             <?php
             if (++$i == 2) break;
         endforeach
         ?>
-    </div>
+    </aside>
 </section>
 
 
